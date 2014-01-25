@@ -1,5 +1,4 @@
-from models import *
-from django.db.models import Q
+from retrievalFuncs import *
 
 def new_node(user, name, content, related): #related is a list of nodes that will be connected to this node by edges
  n = Node()
@@ -15,8 +14,8 @@ def new_node(user, name, content, related): #related is a list of nodes that wil
 def new_edge(name1, name2):
  try:
   #Get the Node objects.
-  n1 = Node.objects.filter(name=name1)[0]
-  n2 = Node.objects.filter(name=name2)[0]
+  n1 = get_name(name1)
+  n2 = get_name(name2)
 
   #Insanity Checking:
    #No Node should be linked to itself directly.
