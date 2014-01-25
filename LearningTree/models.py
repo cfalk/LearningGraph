@@ -5,7 +5,7 @@ class Node(models.Model):
  #Content Information
  name = models.CharField(max_length=100, unique=True)
  content = models.CharField(max_length=300)
- user = models.ForeignKey("User")
+ user = models.ForeignKey(User)
 
  #Rating Information
  good = models.IntegerField(default=0)
@@ -15,8 +15,8 @@ class Node(models.Model):
   return self.name
 
 class Edge(models.Model):
- node1 = models.ForeignKey("Node", related_name="node1")
- node2 = models.ForeignKey("Node", related_name="node2")
+ node1 = models.ForeignKey(Node, related_name="node1")
+ node2 = models.ForeignKey(Node, related_name="node2")
 
  def __unicode__(self):
   return "{} -- {}".format(self.node1, self.node2)
