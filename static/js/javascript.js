@@ -1,0 +1,1 @@
+$("#kwicks-menu").kwicks("none");

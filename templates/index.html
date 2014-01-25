@@ -1,14 +1,21 @@
 <html>
 <head>
 <title>Learning Tree</title>
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}universal.css">
+<script rel="javascript" type="text/javascript" src="{{ STATIC_URL }}/js/jquery.js"> </script>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/css/universal.css">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/css/kwiks.css">
+<script rel="javascript" type="text/javascript" src="{{ STATIC_URL }}/js/kwiks.js"> </script>
+<script rel="javascript" type="text/javascript" src="{{ STATIC_URL }}/js/javascript.js"> </script>
 </head>
 
 <body>
-{% include "header.html" %}
-{% include "mainmenu.html" %}
 
+{% include "header.html" %}
+<div id="frontimage"></div>
+{% include "mainmenu.html" %}
+<div id="maincontent">
 The main content of the page will be here
+</div>
 
 {% include "footer.html" %}
 </body>
