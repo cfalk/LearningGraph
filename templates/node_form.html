@@ -1,5 +1,10 @@
-<form action="/node_form/" method="post">
+<form id="nodeForm" action="/node_form/" method="post">
  {% csrf_token %}
  {{ form.as_p }}
-<input type="submit" value="Submit" />
+ <label for="related">Related:</label>
+ <div class="listInputContainer">
+<input class="autocomplete listInput" name="related[]" type="text">
+ </div>
+
+ <input type="submit" value="Submit" />
 </form>

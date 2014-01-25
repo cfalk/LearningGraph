@@ -1,102 +1,266 @@
+@font-face {
+  font-family: 'Duru Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Duru Sans'), local('DuruSans-Regular'), url(http://themes.googleusercontent.com/static/fonts/durusans/v4/0rnIdjSQWlqFS5KpKzVfzj8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+
 body {
-background-color:green;
-padding:0px;
-margin:0px;
+ min-width:500px;
+ font-family: Duru Sans;
+ background-color:#80FF80;
+ padding:0px;
+ margin:0px;
 }
 
-div#mainmenu {
-background-color:white;
-padding:10px;
-padding-left:7%;
+input, textarea {
+ border:2px solid #B3FFB3;
+ border-radius:10px;
+ padding:10px;
 }
 
-div.menuitem {
-display:inline;
-border: 1px solid black;
-padding:3px;
-margin:5px;
-border-radius:10px;
-font-size:20px;
+input[type=submit]{
+ cursor:pointer;
+ height:70px;
+ font-size:36px;
+ border-radius:10px;
+ margin: 0 auto;
+ vertical-align:top;
 }
 
-div#maincontent {
-width:80%;
-padding:20px;
-margin:10%;
-margin-top:10%;
-margin-bottom:3%;
-background-color:white;
-border-radius:20px;
+
+input[type=text] {
+ height:70px;
+ font-size:42px;
+ vertical-align:top;
 }
 
-div#header {
-height:100px;
-font-size: 40px;
-font-style:italic;
-font-variant: small-caps;
+form label {
+ display:block;
+ vertical-align:top;
+ font-weight:bold;
 }
 
-div#frontimage {
-height:230px;
-width:900px;
-border:1px solid black;
-margin:1% 10%;
-background-color:lightgrey;
-}
-td {
-width:50%;
-padding:5px;
-border-top:1px solid black;
+form p {
+ margin-top:0px;
 }
 
-tr {
-vertical-align:top;
+
+a {
+ color:#008000;
+ text-decoration:none;
+ opacity:0.8;
 }
 
-#kwicks-list li { 
-  float: left; 
-  width: 125px; 
-  height: 100px; 
-  margin-right: 5px;
-  background-color: white; 
-} 
-#kwicks-list .kwick1 {
-background: #53b388; 
-height:100px;
+a:hover {
+ opacity:1;
+ cursor:pointer;
+}
+
+form {
+ text-align:center;
+}
+
+.unselectable{
+ cursor:default;
+ user-select: none;
+ -webkit-touch-callout: none;
+ -webkit-user-select: none;
+ -khtml-user-select: none;
+ -moz-user-select: none;
+ -ms-user-select: none;
+}
+
+
+#userContainer {
+ position:relative;
+ width:100%;
+ padding: 20px 0px 20px 0px;
+ text-align:right;
+}
+
+#userContainer a {
+ margin-right:40px;
+}
+
+.loginImage {
+ width:40px;
+ height: auto;
+}
+
+#header {
+ cursor:default;
+ text-align:center;
+ color:#003300;
+ font-size: 56px;
+ font-weight:bold;
+ margin-top:100px;
+}
+
+#footer {
+ text-align:center;
+ font-size:14px;
+ margin-top:25px; 
+}
+
+#search {
+ height:70px;
+ width: 350px;
+ margin-bottom:200px;
+ font-size:42px;
+ border-radius:5px;
+ border-top-left-radius:10px;
+}
+
+#node {
+ border-radius:40px;
+ background-color:white;
+ height: 100%;
+ margin-left: 2%;
+ margin-right: 2%;
+}
+
+#buttontitle {
 text-align:center;
-line-height:100px;
-font-size:36px;
-text-decoration:none;
-color:white;
-} 
-#kwicks-list .kwick2 {
-background: #5a69a9;
-height:100px;
+font-size: 45px;
+}
+
+#pathbuttons {
 text-align:center;
-line-height:100px;
-font-size:36px;
-text-decoration:none;
+}
+
+.pathselect {
+width:330px;
+display:inline-block;
+border-radius:30px;
+font-size:26px;
+background-color:#779ECB;
+padding:50px 20px;
+margin:10px;
 color:white;
-} 
-#kwicks-list .kwick3 {
-background: #c26468; 
-height:100px;
-text-align:center;
-line-height:100px;
-font-size:36px;
-text-decoration:none;
-color:white;
-} 
-#kwicks-list .kwick4 { 
-background: #bf7cc7; 
-height:100px; 
-text-align:center;
-line-height:100px;
-font-size:36px;
-text-decoration:none;
-color:white;
-} 
-/* cancel margin on last kwick (if you set a margin above) */ 
-#kwicks-list .kwicks.horizontal .kwick4 { margin-right: none; } 
-/* cancel margin on last kwick (if you set a margin above) */ 
-#kwicks-list .kwicks.vertical .kwick4 { margin-bottom: none; }}
+}
+
+.subheader {
+ margin-bottom:50px;
+ text-align:center;
+ padding-bottom:10px;
+ font-size:30px;
+ letter-spacing:15px;
+ font-weight:bold;
+}
+
+.errorlist {
+ padding:10px 0px 10px 0px;
+ width:100%;
+ margin-top:10px;
+ margin-bottom:5px;
+ border-radius:10px;
+ background-color:#FF8080;
+ list-style:none;
+}
+
+
+.ribbonMessage {
+ position:fixed;
+ top:45%;
+ padding-top:25px;
+ padding-bottom:25px;
+ width:100%;
+ text-align:center;
+ border-top:2px solid black;
+ border-bottom:2px solid black;
+ font-size:24px;
+ color:black;
+ z-index:1000;
+}
+
+/* jQuery UI Style */
+.ui-menu .ui-menu-item a.ui-state-focus,
+.ui-menu .ui-menu-item a.ui-state-active,
+.ui-menu .ui-menu-item a
+{ background: #ffffff none no-repeat; 
+padding:0;
+margin:0;
+display:block;
+border:0;border-collapse:collapse;
+}
+
+.ui-menu-item {
+ background-color:#9FFF80;
+}
+
+.listInputContainer, .inputBlock {
+ margin-bottom:20px;
+ width:100%;
+}
+
+.addListInputButton {
+ display:inline-block;
+ position:absolute;
+ background-color:white;
+ color:green;
+ padding:5px 10px 5px 10px;
+ border-radius:5px;
+ font-size:16px;
+ font-weight:bold;
+ cursor:pointer;
+}
+
+.kwicks {
+ position:relative;
+ height: 60px;
+ margin:0px;
+ padding:0px;
+ margin-bottom:10px;
+ }
+ .kwicks > a {
+ position:relative;
+ display:inline-block;
+ white-space:nowrap;
+ color:white;
+ padding-top:20px;
+ padding-bottom:20px;
+ text-align:center;
+ /* overridden by kwicks but good for when JavaScript is disabled */
+ width:20%;
+ margin:0px;
+ float: center;
+ border-right:1px solid #134D00;
+ background-color:#004D00;
+ } 
+
+.kwicks > a:last-child { border-right:0px; } 
+
+#nodename {
+text-align: center;
+}
+
+#nodecontent {
+ float: left;
+ margin-left: 20px;
+}
+
+#noderate {
+ float: right;
+ margin-right: 50px;
+}
+
+.mynode {
+ margin: 0 auto;
+ padding: 10px;
+ margin-top: 5px;
+ margin-bottom: 10px; 
+ height: 225px;
+ width: 80%;
+ background-color: white;
+ border-radius: 40px;
+}
+
+.mynode-content {
+ margin-right: 10px;
+}
+
+.mynode-info {
+float: left;
+margin-right: 20%;
+}

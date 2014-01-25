@@ -1,0 +1,12 @@
+<div id="swatchMenu">	
+ <a href="/explore/"><div title="Explore and learn." class="swatch unselectable">Home</div></a>
+ <a href="/random/"><div title="Pick a random leaf." class="swatch unselectable">Random</div></a>
+ <a href="/about/"><div title="About the project." class="swatch unselectable">About</div></a>
+</div>
+
+<ul id=kwicks-list class="kwicks kwicks-horizontal">
+  <a class=kwick1>Hello</a>
+  <a class=kwick2>Sup?</a>
+  <a class=kwick3>Hola</a>
+  <a class=kwick4>Howdy</a>
+</ul>

@@ -1,0 +1,173 @@
+{% include "mainmenu.html" %}
+<style>
+.link {  
+stroke: #666;
+opacity: 0.6;
+stroke-width: 1.5px; 
+} 
+.node circle { 
+stroke: #fff; 
+opacity: 0.6;
+stroke-width: 1.5px; 
+} 
+text { 
+font: 20px serif; 
+opacity: 0.6;
+pointer-events: none; 
+}
+</style> 
+<div class="header">Graph of Knowledge</div>
+<div class="container" style="text-align:center;"></div>
+
+<script> 
+  var links = [ { "source" : "HTML", "target" : "CSS", "views" : 4 }, 
+{ "source" : "CSS", "target" : "JavaScript" },
+{ "source" : "CSS", "target" : "Frameworks" }, 
+{ "source" : "JavaScript", "target" : "JQuery" }, 
+{ "source" : "Frameworks", "target" : "PHP" }, 
+{ "source" : "Frameworks", "target" : "Django" }, 
+{ "source" : "Frameworks", "target" : "Ruby" }, 
+{ "source" : "JavaScript", "target" : "JQuery Mobile" }, 
+{ "source" : "PHP", "target" : "MySQL" }, 
+{ "source" : "Django", "target" : "MySQL" }, 
+{ "source" : "Ruby", "target" : "MySQL" } 
+] ; 
+ var width = 700 
+ height = 600 ; 
+ 
+var nodes = {}
+
+// Compute the distinct nodes from the links.
+links.forEach(function(link) {
+link.source = nodes[link.source] || 
+(nodes[link.source] = {name: link.source});
+link.target = nodes[link.target] || 
+(nodes[link.target] = {name: link.target});
+link.views  nodes[link.views] ||
+(nodes[link.views] = {name: link.views});
+link.value = +link.value;
+});
+
+var color = d3.scale.category20();
+
+var force = d3.layout.force() 
+.nodes(d3.values(nodes)) 
+.links(links) 
+.size([width, height]) 
+.linkDistance(80) 
+.charge(-400) 
+.on("tick", tick) 
+.start(); 
+
+var svg = d3.select("div.container").append("svg") 
+.attr("width", width) 
+.attr("height", height); 
+
+var link = svg.selectAll(".link") 
+.data(force.links()) 
+.enter().append("line") 
+.attr("class", "link"); 
+
+var node = svg.selectAll(".node") 
+.data(force.nodes()) 
+.enter().append("g") 
+.attr("class", "node") 
+.on("mouseover", mouseover) 
+.on("mouseout", mouseout) 
+.on("click", click)
+.on("dblclick", dblclick)
+.call(force.drag); 
+
+node.append("circle") 
+.attr("r", 8)
+.style("fill", function(d) { return color(d.value); });
+
+node.append("text") 
+.attr("x", 12) 
+.attr("dy", ".35em") 
+.style("fill", "steelblue")
+.text(function(d) { return d.name; }); 
+
+function tick() { 
+link 
+.attr("x1", function(d) { return d.source.x; }) 
+.attr("y1", function(d) { return d.source.y; }) 
+.attr("x2", function(d) { return d.target.x; }) 
+.attr("y2", function(d) { return d.target.y; }); 
+
+node 
+.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; }); 
+} 
+
+function mouseover() { 
+d3.select(this).select("circle").transition() 
+.duration(750) 
+.attr("r", 16); 
+} 
+
+function mouseout() { 
+d3.select(this).select("circle").transition() 
+.duration(750) 
+.attr("r", 8); 
+} 
+// action to take on mouse click
+function click() {
+d3.select(this).select("text").transition()
+.duration(750)
+.attr("x", 22)
+.style("stroke-width", ".5px")
+.style("fill", "#E34A33")
+.style("font", "20px serif");
+d3.select(this).select("circle").transition()
+.duration(750)
+.style("fill", "#E34A33")
+.attr("r", 16)
+}
+
+// action to take on mouse double click
+function dblclick() {
+d3.select(this).select("circle").transition()
+.duration(750)
+.attr("r", 6)
+.style("fill", "#E34A33");
+d3.select(this).select("text").transition()
+.duration(750)
+.attr("x", 12)
+.style("stroke", "none")
+.style("fill", "#E34A33")
+.style("stroke", "none")
+.style("font", "20px serif");
+}
+
+</script>
+
+<style>
+.chart div {
+font:10px;
+background-color: steelblue;
+text-align:right;
+padding:3px;
+margin:1px;
+color:white;
+}
+
+
+</style>
+<div class="chartheader">Node Views</div>
+<div class="chart">
+<script>
+        var data = [10, 8, 14, 32, 20, 15];
+
+        var x = d3.scale.linear()
+                .domain([0, d3.max(data)])
+                .range([0, 420]);
+
+        d3.select(".chart")
+          .selectAll("div")
+                .data(data)
+          .enter().append("div")
+                .style("width", function(d) { return x(d) + "px"; })
+                .style("text-align", "center")
+                .text(function(d) {return d + " HTML"; })
+</script>
+ 

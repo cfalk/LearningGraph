@@ -1,27 +1,26 @@
-<html>
-<head><title>Node</title>
-<script rel="javascript" type="text/javascript" src="{{ STATIC_URL }}/js/jquery.js"> </script>
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/css/universal.css">
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/css/kwiks.css">
-<script rel="javascript" type="text/javascript" src="{{ STATIC_URL }}/js/kwiks.js"> </script>
-<script rel="javascript" type="text/javascript" src="{{ STATIC_URL }}/js/javascript.js"> </script>
 
-</head>
-<body>
+<div class="subHeader unselectable">{{ node.name }}</div>
 {% include "mainmenu.html" %}
-<div id="node">
-	{{ name }}
-	<div id="nodecontent">
-		<p> {{ content }} </p>
-		<div> {{ good }} </div> <div> {{ bad }} </div>
+<div id="node" pid="{{node.id}}">
+	{% if node %}
+	<!--<h2 id=nodename>{{ node.name }}</h2>-->
+	<div id="nodecontent" style="float: left; margin-left: 30px; width: 70%">
+		<p style="width: 70%"> {{ node.content }} </p>
+	</div>	
+		<div=noderate style="float: right; margin-right: 50px;">
+			<h3> Good </h3> {{ node.good }}
+			<h3> Bad </h3>	{{ node.bad }}
+		 </div>
 	</div>
-	<div id="links">
-		<ul id="nodelink">
-			<li><a href="#link">Link 1</a></li>
-			<li><a href="#link">Link 2</a></li>
+	<div id="edges">
+		<ul id="nodeedge">
+			{% for edge in edges %}
+			<li pid="{{edge.id}}"> {{ edge.url }} <p> {{ edge.hits }} </p> {{ edge.good }} {{ edge.bad }} </li>
+			{% endfor %}
 		</ul>
 	</div>
+	{% else %}
+	Node not found!
+
+	{% endif %}
 </div>
-</body>
-</html>
-	

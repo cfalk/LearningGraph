@@ -1,3 +1,17 @@
+{% include "header.html" %}
+<div style="margin-top:20;" class="subHeader unselectable">My Nodes</div>
+{% include "mainmenu.html" %}
 {% for node in nodes %}
-{{ node }}
+<div class="mynode">
+<div class=mynode-info>
+<h2 style="margin-left: 20px;">Node Name: {{ node.name }}</h2>
+<a style="margin-left: 20px;">Edit</a>
+<h3 style="margin-left: 20px;"> Votes </h3>
+<p style="margin-left: 20px;"> Good {{ node.good }} </p>
+<p style="margin-left: 20px;"> Bad {{ node.bad }} </p>
+</div>
+<div class=mynode-content>
+<p>{{ node.content }}</p>
+</div>
+</div>
 {% endfor %}

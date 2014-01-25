@@ -1,0 +1,10 @@
+<form id="careerForm" action="/career_form/" method="post">
+ {% csrf_token %}
+ {{ form.as_p }}
+<label for="start_node">Starting Node</label>
+ <div class="inputBlock">
+<input class="autocomplete" name="start_node" type="text">
+ </div>
+
+ <input type="submit" value="Submit" />
+</form>

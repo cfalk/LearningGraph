@@ -1,25 +1,22 @@
 from models import *
 from django.db.models import Q
 
-#All retrieval functions return a QuerySet
-
-
 # # # # # # # # # Edge # # # # # # # # # # # # # # # # # # 
 def get_node_edges(node):
  return Edge.objects.filter(Q(node1=node)|Q(node2=node))
 
 def get_edge(n1, n2):
- return Edge.objects.filter(Q(node1=n1, node2=n2)|Q(node1=n2, node2=n1))
+ return Edge.objects.filter(Q(node1=n1, node2=n2)|Q(node1=n2, node2=n1))[0]
 
 # # # # # # # # # Node # # # # # # # # # # # # # # # # # # 
 def get_node(name):
- return Node.objects.filter(name=name)
+ return Node.objects.filter(name=name)[0]
 
 def get_user_nodes(user):
  return Node.objects.filter(user=user)
 
 # # # # # # # # #  # # # # # # # # # # # # # # # # # # 
 def get_link(link):
- return Link.objects.filter(url=name)
+ return Link.objects.filter(url=name)[0]
 
 
