@@ -37,9 +37,9 @@ font-variant: small-caps;
 }
 
 div#frontimage {
-height:330px;
-width:800px;
+height:230px;
+width:900px;
 border:1px solid black;
-margin:10% 3%;
+margin:1% 10%;
 background-color:lightgrey;
 }

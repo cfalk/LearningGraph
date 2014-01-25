@@ -1,1 +1,1 @@
-$("#kwicks-menu").kwicks("none");
+$("#kwicks-menu").kwicks(beahvior='menu');
