@@ -43,14 +43,14 @@ border:1px solid black;
 margin:1% 10%;
 background-color:lightgrey;
 }
-
-div#subcontent1 {
-width:45%;
-border-right:3px solid black;
+td {
+width:50%;
+padding:5px;
+border-top:1px solid black;
 }
 
-div#subcontent2 {
-width:45%;
+tr {
+vertical-align:top;
 }
 
 #kwicks-list li { 
@@ -60,10 +60,42 @@ width:45%;
   margin-right: 5px;
   background-color: white; 
 } 
-#kwicks-list .kwick1 { background: #53b388; } 
-#kwicks-list .kwick2 { background: #5a69a9; } 
-#kwicks-list .kwick3 { background: #c26468; } 
-#kwicks-list .kwick4 { background: #bf7cc7; } 
+#kwicks-list .kwick1 {
+background: #53b388; 
+height:100px;
+text-align:center;
+line-height:100px;
+font-size:36px;
+text-decoration:none;
+color:white;
+} 
+#kwicks-list .kwick2 {
+background: #5a69a9;
+height:100px;
+text-align:center;
+line-height:100px;
+font-size:36px;
+text-decoration:none;
+color:white;
+} 
+#kwicks-list .kwick3 {
+background: #c26468; 
+height:100px;
+text-align:center;
+line-height:100px;
+font-size:36px;
+text-decoration:none;
+color:white;
+} 
+#kwicks-list .kwick4 { 
+background: #bf7cc7; 
+height:100px; 
+text-align:center;
+line-height:100px;
+font-size:36px;
+text-decoration:none;
+color:white;
+} 
 /* cancel margin on last kwick (if you set a margin above) */ 
 #kwicks-list .kwicks.horizontal .kwick4 { margin-right: none; } 
 /* cancel margin on last kwick (if you set a margin above) */ 

@@ -10,8 +10,10 @@
 <body>
 {% include "mainmenu.html" %}
 <div id="node">
+	{{ name }}
 	<div id="nodecontent">
-  This is where the main node body will go, with all of the links below
+		<p> {{ content }} </p>
+		<div> {{ good }} </div> <div> {{ bad }} </div>
 	</div>
 	<div id="links">
 		<ul id="nodelink">
