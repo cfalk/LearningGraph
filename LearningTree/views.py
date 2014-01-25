@@ -25,3 +25,8 @@ def node_form(request):
   form = NodeForm() 
 
  return render(request,"node_form.html", {"form":form})
+ 
+def login(request):
+ if request.user.is_authenticated():
+  return redirect('home')
+ return render_to_response('login.html', {}, RequestContext(request))

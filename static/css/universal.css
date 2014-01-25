@@ -23,7 +23,7 @@ div#maincontent {
 width:80%;
 padding:20px;
 margin:10%;
-margin-top:3%;
+margin-top:10%;
 margin-bottom:3%;
 background-color:white;
 border-radius:20px;
@@ -44,18 +44,27 @@ margin:1% 10%;
 background-color:lightgrey;
 }
 
-#kwicks-menu li { 
+div#subcontent1 {
+width:45%;
+border-right:3px solid black;
+}
+
+div#subcontent2 {
+width:45%;
+}
+
+#kwicks-list li { 
   float: left; 
   width: 125px; 
   height: 100px; 
   margin-right: 5px;
   background-color: white; 
 } 
-#kwicks-menu .kwick1 { background: #53b388; } 
-#kwicks-menu .kwick2 { background: #5a69a9; } 
-#kwicks-menu .kwick3 { background: #c26468; } 
-#kwicks-menu .kwick4 { background: #bf7cc7; } 
+#kwicks-list .kwick1 { background: #53b388; } 
+#kwicks-list .kwick2 { background: #5a69a9; } 
+#kwicks-list .kwick3 { background: #c26468; } 
+#kwicks-list .kwick4 { background: #bf7cc7; } 
 /* cancel margin on last kwick (if you set a margin above) */ 
-#kwicks-menu .kwicks.horizontal .kwick4 { margin-right: none; } 
+#kwicks-list .kwicks.horizontal .kwick4 { margin-right: none; } 
 /* cancel margin on last kwick (if you set a margin above) */ 
-#kwicks-menu .kwicks.vertical .kwick4 { margin-bottom: none; }}
+#kwicks-list .kwicks.vertical .kwick4 { margin-bottom: none; }}

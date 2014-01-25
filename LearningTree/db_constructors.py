@@ -11,18 +11,18 @@ def new_node(user, name, content, related): #related is a list of nodes that wil
   e.save()
 
 
+#Create a new edge between two Nodes (input by name) or fail.
 def new_edge(name1, name2):
  try:
   #Get the Node objects.
-  n1 = get_name(name1)
-  n2 = get_name(name2)
+  n1 = get_node(name1)
+  n2 = get_node(name2)
 
   #Insanity Checking:
    #No Node should be linked to itself directly.
-  assert node_name1 != node_name2
+  assert node_name1 != node_name2 != None 
    #No Edge should already exist.
-  assert not Edge.objects.filter(node1=n1, node2=n2).exists()
-  assert not Edge.objects.filter(node2=n2, node1=n1).exists()
+  assert not get_edge(n1, n2).exists()
 
   #Save the new node.
   e = Edge(node1=n1, node2=n2)

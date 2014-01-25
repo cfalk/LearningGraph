@@ -6,8 +6,9 @@ urlpatterns = patterns('',
     url(r'^$', home),
     url(r'^index/?$', home),
     # url(r'^blog/', include('blog.urls')),
+    url(r'^login/$', home),
     url(r'^node/?$', node),
     url(r'^node_form/?$', node_form),
-
+    #url(r'^user_nodes/?$', user_nodes),
     url('', include('social.apps.django_app.urls', namespace='social')),
 )

@@ -22,7 +22,8 @@ class Edge(models.Model):
   return "{} -- {}".format(self.node1, self.node2)
 
 class Link(models.Model):
- url = models.CharField(max_length=300)
+ url = models.CharField(max_length=300, unique=True)
+ hits = models.IntegerField(default = 0)
  good = models.IntegerField(default=0)
  bad = models.IntegerField(default=0)
 

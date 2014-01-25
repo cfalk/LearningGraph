@@ -1,11 +1,16 @@
-$('#kwicks-menu').kwicks({ 
+/*$('#kwicks-list').kwicks({ 
   event : 'click', 
   eventClose: 'click', 
   max : 330,
-  behavior: 'menu', 
+  behavior: 'slideshow', 
   spacing : 5, 
-  completed : function(){ 
-    addMessage('<span class="hilight">something, something,' + 
-      'something... com-plete</span>'); 
-  } 
+});
+*/
+$().ready(function () {
+    $('#kwicks-list').kwicks({
+        maxSize: 400,
+        spacing: 0,
+        behavior: 'menu'
+    });
+    $('kwicks-list').kwicks('expand', 0);
 });
