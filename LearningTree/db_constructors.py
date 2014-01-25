@@ -20,9 +20,9 @@ def new_edge(name1, name2):
 
   #Insanity Checking:
    #No Node should be linked to itself directly.
-  assert node_name1 != node_name2 != None 
+  assert name1 != name2 != None 
    #No Edge should already exist.
-  assert not get_edge(n1, n2).exists()
+  assert not get_edges(n1, n2).exists()
 
   #Save the new node.
   e = Edge(node1=n1, node2=n2)

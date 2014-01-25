@@ -52,24 +52,23 @@ def node_form(request):
  u = request.user
  
  if u.is_authenticated() and request.method=="POST":
-  node= Node()
-  node.user = u
-  form = NodeForm(request.POST, instance=node) 
-
-  if form.is_valid():
-   try:
-    related = request.POST.get_list("related[]")
+  try: 
+   node= Node()
+   node.user = u
+   form = NodeForm(request.POST, instance=node) 
+   form.save()
+   assert form.is_valid()
+   
+   #Make the edges if edges are supplied.
+   if request.POST.get("related[]"):
+    related_nodes = request.POST.getlist("related[]")
     for name in related_nodes:
      try:
       new_edge(node.name, name)
      except Exception as e:
-      print e     
       pass
-   except:
-    pass
-   form.save()
    return HttpResponse(0)
-  else:
+  except:
    return render(request, "node_form.html", {"form":form})
  else:
   form = NodeForm() 
@@ -92,6 +91,7 @@ def user_nodes(request):
   nodes = None
  return render(request, "info_page_global.html", {"template":"user_nodes", "nodes":nodes})
 
+# # # # # # # # # # # # # AJAX Requests # # # # # # # # # # 
 def get_node_names(request):
  try:
   node_names = [unicode(entry.name) for entry in Node.objects.all()]

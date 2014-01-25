@@ -60,6 +60,8 @@ $("textarea").focusout(function(){
     $("#nodeForm").html(response)
     setAutoComplete(".autocomplete")
    } else {
+    $("form").find("input[type=text]").val("");
+    $("form").find("textarea").val("");
     showRibbon("Leaf added!", goodColor, "body"); 
    }
   });
@@ -72,6 +74,7 @@ $("textarea").focusout(function(){
   var container = $(this).closest(".listInputcontainer");
   $(container).clone().insertAfter($(container))
   setAutoComplete($(".autocomplete"))
+  $(".listInputContainer:last").find("input[name=\"related[]\"]").val("");
   $(this).remove()
  });
 

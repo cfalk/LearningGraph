@@ -1,10 +1,12 @@
+{% load url from future %}
 <div id="userContainer" class="unselectable">
  {% if user.is_authenticated %}
-  <a title="View my nodes." href="/my_nodes/">My</a>
+  <a title="View nodes you added." href="/my_nodes/">My Nodes</a>
   <a title="Add a new career type." href="/career_form/">Add Career</a>
   <a title="Add a new leaf." href="/node_form/">Add Node</a>
   <a href="/logout/">Log Out</a>
  {% else %}
-  <a href="/login/facebook/"><img class="loginImage" src="https://www.facebook.com/images/fb_icon_325x325.png" title="Facebook Login"></a>
+  <a href="{% url 'social:begin' 'facebook' %}"><img class="loginImage" src="https://www.facebook.com/images/fb_icon_325x325.png" title="Facebook Login"></a>
+  <a href="{% url 'social:begin' 'google-oauth2' %}">EL GOOG</a>
  {% endif %}
 </div>

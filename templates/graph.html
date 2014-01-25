@@ -21,21 +21,21 @@ pointer-events: none;
 
 <script> 
   var links = [ { "source" : "HTML", "target" : "CSS", "views" : 4 }, 
-{ "source" : "CSS", "target" : "JavaScript" },
-{ "source" : "CSS", "target" : "Frameworks" }, 
-{ "source" : "JavaScript", "target" : "JQuery" }, 
-{ "source" : "Frameworks", "target" : "PHP" }, 
-{ "source" : "Frameworks", "target" : "Django" }, 
-{ "source" : "Frameworks", "target" : "Ruby" }, 
-{ "source" : "JavaScript", "target" : "JQuery Mobile" }, 
-{ "source" : "PHP", "target" : "MySQL" }, 
-{ "source" : "Django", "target" : "MySQL" }, 
-{ "source" : "Ruby", "target" : "MySQL" } 
+{ "source" : "CSS", "target" : "JavaScript", "views" : 5 },
+{ "source" : "CSS", "target" : "Frameworks", "views" : 6 }, 
+{ "source" : "JavaScript", "target" : "JQuery", "views":7 }, 
+{ "source" : "Frameworks", "target" : "PHP", "views":8 }, 
+{ "source" : "Frameworks", "target" : "Django", "views":9 }, 
+{ "source" : "Frameworks", "target" : "Ruby", "views":10 }, 
+{ "source" : "JavaScript", "target" : "JQuery Mobile", "views":9 },
+{ "source" : "PHP", "target" : "MySQL", "views": 8 }, 
+{ "source" : "Django", "target" : "MySQL", "views":7 }, 
+{ "source" : "Ruby", "target" : "MySQL", "views":6 } 
 ] ; 
  var width = 700 
  height = 600 ; 
  
-var nodes = {}
+var nodes = {};
 
 // Compute the distinct nodes from the links.
 links.forEach(function(link) {
@@ -43,8 +43,8 @@ link.source = nodes[link.source] ||
 (nodes[link.source] = {name: link.source});
 link.target = nodes[link.target] || 
 (nodes[link.target] = {name: link.target});
-link.views  nodes[link.views] ||
-(nodes[link.views] = {name: link.views});
+link.views =  nodes[link.views] ||
+(nodes[link.views] = {views: link.views});
 link.value = +link.value;
 });
 
@@ -79,7 +79,7 @@ var node = svg.selectAll(".node")
 .call(force.drag); 
 
 node.append("circle") 
-.attr("r", 8)
+.attr("r", function(d) { return d.views; })
 .style("fill", function(d) { return color(d.value); });
 
 node.append("text") 
