@@ -9,3 +9,6 @@ def get_node_edges(node):
 
 def get_node(name):
  return Node.objects.filter(name=name)[0]
+
+def get_edge(n1, n2):
+ return Edge.objects.filter(Q(node1=n1, node2=n2)|Q(node1=n2, node2=n1))

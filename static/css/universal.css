@@ -48,11 +48,14 @@ background-color:lightgrey;
   float: left; 
   width: 125px; 
   height: 100px; 
-  margin-right: 5px; 
+  margin-right: 5px;
+  background-color: white; 
 } 
 #kwicks-menu .kwick1 { background: #53b388; } 
 #kwicks-menu .kwick2 { background: #5a69a9; } 
+#kwicks-menu .kwick3 { background: #c26468; } 
+#kwicks-menu .kwick4 { background: #bf7cc7; } 
 /* cancel margin on last kwick (if you set a margin above) */ 
-#basic .kwicks.horizontal .kwick2 { margin-right: none; } 
+#kwicks-menu .kwicks.horizontal .kwick4 { margin-right: none; } 
 /* cancel margin on last kwick (if you set a margin above) */ 
-#basic .kwicks.vertical .kwick2 { margin-bottom: none; }
+#kwicks-menu .kwicks.vertical .kwick4 { margin-bottom: none; }}

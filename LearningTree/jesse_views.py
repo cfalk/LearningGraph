@@ -3,19 +3,22 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
 class NodeForm(forms.Form):
-	name = forms.CharField(max_length=45)
+	name = forms.CharField()
 	user = forms.CharField()
 	content = forms.CharField()
 	related = forms.CharField()
 
 def add_node(request):
-	if request.method == 'POST'
-		form = NodeForm(request.POST)
+	if request.method == '???'
+		form = NodeForm(request.???)
 		if form.is_valid():
-			#return HttpResponseRedirect() NEEDS REDIRECT
+		#####form processing####
+
+			return HttpResponseRedirect('???')
 	else:
 		form = NodeForm()
-	return render(request, '', {'form':form})
+
+	return render(request, '???', {'form':form})
 
 
 
