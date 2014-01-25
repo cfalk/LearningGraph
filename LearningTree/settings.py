@@ -37,7 +37,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'LearningTree'
-    'social.apps.django_app.default'
 )
 
 AUTHENTICATION_BACKENDS = (

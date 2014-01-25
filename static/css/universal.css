@@ -43,3 +43,17 @@ border:1px solid black;
 margin:1% 10%;
 background-color:lightgrey;
 }
+
+#kwicks-menu li { 
+  float: left; 
+  width: 125px; 
+  height: 100px; 
+  margin-right: 5px; 
+} 
+#kwicks-menu .kwick1 { background: #53b388; } 
+#kwicks-menu .kwick2 { background: #5a69a9; } 
+#kwicks-menu .kwick3 { background: #c26468; } 
+/* cancel margin on last kwick (if you set a margin above) */ 
+#basic .kwicks.horizontal .kwick3 { margin-right: none; } 
+/* cancel margin on last kwick (if you set a margin above) */ 
+#basic .kwicks.vertical .kwick3 { margin-bottom: none; }
