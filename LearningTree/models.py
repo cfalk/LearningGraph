@@ -15,8 +15,8 @@ class Node(models.Model):
   return self.name
 
 class Edge(models.Model):
- node1 = models.ForeignKey("Node")
- node2 = models.ForeignKey("Node")
+ node1 = models.ForeignKey("Node", related_name="node1")
+ node2 = models.ForeignKey("Node", related_name="node2")
 
  def __unicode__(self):
   return "{} -- {}".format(self.node1, self.node2)
