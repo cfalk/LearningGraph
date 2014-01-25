@@ -70,6 +70,24 @@ $("textarea").focusout(function(){
   return false;
  })
 
+$(document).on("submit", "#careerForm", function(event) {
+  $(".errorlist").remove() // Remove any errors that exist.
+  form = $(this);
+  form_data = $(this).serialize()
+  $.post($(form).attr("action"), form_data, function(response) {
+   if (response!="0"){
+    $("#careerForm").html(response)
+   } else {
+    $("form").find("input[type=text]").val("");
+    showRibbon("Career added!", goodColor, "body");
+   }
+  });
+  //Don't allow the original form to submit.
+  event.stopPropagation();
+  return false;
+ })
+
+
  $(document).on("click", ".addListInputButton", function (){
   var container = $(this).closest(".listInputcontainer");
   $(container).clone().insertAfter($(container))

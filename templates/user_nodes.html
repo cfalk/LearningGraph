@@ -1,6 +1,8 @@
 {% include "header.html" %}
 <div style="margin-top:20;" class="subHeader unselectable">My Nodes</div>
 {% include "mainmenu.html" %}
+
+{% if nodes %}
 {% for node in nodes %}
 <div class="mynode">
 <div class=mynode-info>
@@ -15,3 +17,9 @@
 </div>
 </div>
 {% endfor %}
+
+{% else %}
+
+<p>You don't have any nodes. <a href="/node_form/">Make one?</a>
+
+{% endif %}

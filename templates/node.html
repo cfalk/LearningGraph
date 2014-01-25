@@ -15,7 +15,11 @@
 	<div id="edges">
 		<ul id="nodeedge">
 			{% for edge in edges %}
-			<li pid="{{edge.id}}"> {{ edge.url }} <p> {{ edge.hits }} </p> {{ edge.good }} {{ edge.bad }} </li>
+				{% if node.name == edge.node1 %}
+					<li pid="{{edge.id}}"> Name: {{ edge.node2 }}  {{ edge.good }} {{ edge.bad }} </li>
+				{% else %}
+					<li pid="{{edge.id}}"> Name: {{ edge.node1 }}   Good: {{ edge.good}} Bad: {{ edge.bad }} </li>
+				{% endif %}
 			{% endfor %}
 		</ul>
 	</div>

@@ -30,5 +30,5 @@ urlpatterns = patterns('',
 
     #AJAX URLs
     url(r'^get_node_names/$', get_node_names),
-
+    url(r'^get_edges/$', get_edge_pairs),
 )

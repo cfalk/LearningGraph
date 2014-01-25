@@ -20,7 +20,24 @@ pointer-events: none;
 <div class="container" style="text-align:center;"></div>
 
 <script> 
-  var links = [ { "source" : "HTML", "target" : "CSS", "views" : 4 }, 
+var links = [];
+var test = [[1,2],[2,3]]
+
+var obj = {};
+
+$.getJSON("/get_edges/", function(data) {
+ alert(data)
+// $.each(data, function(i, v){
+ //      obj[v.name] = v.value
+  // });
+
+ //});
+})
+
+
+links.append({"source": pair[0], "target":pair[1]});
+ 
+/*  var links = [ { "source" : "HTML", "target" : "CSS", "views" : 4 }, 
 { "source" : "CSS", "target" : "JavaScript", "views" : 5 },
 { "source" : "CSS", "target" : "Frameworks", "views" : 6 }, 
 { "source" : "JavaScript", "target" : "JQuery", "views":7 }, 
@@ -31,11 +48,10 @@ pointer-events: none;
 { "source" : "PHP", "target" : "MySQL", "views": 8 }, 
 { "source" : "Django", "target" : "MySQL", "views":7 }, 
 { "source" : "Ruby", "target" : "MySQL", "views":6 } 
-] ; 
+] ;
+*/ 
  var width = 700 
  height = 600 ; 
- 
-var nodes = {};
 
 // Compute the distinct nodes from the links.
 links.forEach(function(link) {
@@ -79,7 +95,7 @@ var node = svg.selectAll(".node")
 .call(force.drag); 
 
 node.append("circle") 
-.attr("r", function(d) { return d.views; })
+.attr("r", 8) // function(d) { return d.views; })
 .style("fill", function(d) { return color(d.value); });
 
 node.append("text") 

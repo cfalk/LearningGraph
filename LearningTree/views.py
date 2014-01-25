@@ -37,7 +37,8 @@ def career_form(request):
  if u.is_authenticated() and request.method=="POST":
   career = Career()
   career.user = u
-  form = CareerForm(request.POST, instance=node) 
+  career.start_node = get_node(request.POST.get("start_node"))
+  form = CareerForm(request.POST, instance=career) 
 
   if form.is_valid():
    form.save()
@@ -91,14 +92,6 @@ def user_nodes(request):
   nodes = None
  return render(request, "info_page_global.html", {"template":"user_nodes", "nodes":nodes})
 
-# # # # # # # # # # # # # AJAX Requests # # # # # # # # # # 
-def get_node_names(request):
- try:
-  node_names = [unicode(entry.name) for entry in Node.objects.all()]
-  return HttpResponse(json.dumps(node_names), content_type="application/json")
- except Exception as e:
-  print e
-
 def add_career(request):
  u = request.user
  if u.is_authenticated() and request.method=="POST":
@@ -111,5 +104,20 @@ def add_career(request):
   form = CareerForm()
  return render(request, "info_page_global.html", {"template":"career_form", "form":form}) 
 
-#def graph(request):
-# return render(request, 
+# # # # # # # # # # # # # AJAX Requests # # # # # # # # # # 
+def get_node_names(request):
+ try:
+  node_names = [unicode(entry.name) for entry in Node.objects.all()]
+  return HttpResponse(json.dumps(node_names), content_type="application/json")
+ except Exception as e:
+  print e
+
+def get_edge_pairs(request):
+ try:
+  edges = [[unicode(edge.node1), unicode(edge.node2)] for edge in get_all_edges()]
+  return HttpResponse(json.dumps(edges), content_type="application/json")
+ except:
+  pass
+
+
+

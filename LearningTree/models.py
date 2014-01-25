@@ -19,6 +19,7 @@ class Edge(models.Model):
  node2 = models.ForeignKey(Node, related_name="node2")
  good = models.IntegerField(default=0)
  bad = models.IntegerField(default=0)
+ hits = models.IntegerField(default = 0)
 
  def __unicode__(self):
   return "{} -- {}".format(self.node1, self.node2)
