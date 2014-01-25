@@ -10,6 +10,6 @@ urlpatterns = patterns('',
     url(r'^$', home),
     url(r'^index/$', home),
     # url(r'^blog/', include('blog.urls')),
-
+    url(r'^node/$', node),
     url(r'^admin/', include(admin.site.urls)),
 )

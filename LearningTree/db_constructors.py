@@ -10,3 +10,20 @@ def new_node(user, name, content, related): #related is a list of nodes that wil
   e = Edge(node1=n, node2=node)
   e.save()
 
+
+def new_edge(name1, name2):
+ try:
+  #Insanity Checking:
+   #No Node should be linked to itself directly.
+  assert node_name1 != node_name2
+   #No Edge could already exist.
+  assert not Edge.objects.filter(node1=n1, node2=n2).exists()
+  assert not Edge.objects.filter(node2=n2, node1=n1).exists()
+
+  n1 = Node.objects.filter(name=name1)[0]
+  n2 = Node.objects.filter(name=name2)[0]
+  e = Edge(node1=n1, node2=n2)
+  e.save()
+ except Exception as e:
+  print "Edge construct failed: {}".format(e)
+
