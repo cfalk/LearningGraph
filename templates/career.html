@@ -1,0 +1,31 @@
+
+<div class="subHeader unselectable">{{ career.name }}</div>
+{% include "mainmenu.html" %}
+<div id="careernodes">
+	<h2> Beginner skills </h2>
+  	<ul>
+	{% for node in nodes %}
+  		{% if node.difficulty == "Beginner" %}
+			<li><a class=nodelink> {{ node.name }} </a></li>
+		{% endif %}
+	{% endfor %}
+	</ul>
+	<h2> Intermediate skills </h2>
+  	<ul>
+	{% for node in nodes %}
+  		{% if node.difficulty == "Intermediate" %}
+			<li><a class=nodelink> {{ node.name }} </a></li>
+		{% endif %}
+	{% endfor %}
+	</ul>
+	<h2> Advanced skills </h2>
+  	<ul>
+	{% for node in nodes %}
+  		{% if node.difficulty == "Advanced" %}
+			<li><a class=nodelink> {{ node.name }} </a></li>
+		{% endif %}
+	{% endfor %}
+	</ul>
+</div>
+
+

@@ -1,3 +1,11 @@
+{% include "header.html" %}
+<div class="subHeader unselectable">Add Node</div>
+{% include "mainmenu.html" %}
+
+{% if addedNode %}
+<div class="successToken">"{{ addedNode.name }}" added!</div>
+{% endif %}
+
 <form id="nodeForm" action="/node_form/" method="post">
  {% csrf_token %}
  {{ form.as_p }}

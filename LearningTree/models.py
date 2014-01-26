@@ -24,6 +24,22 @@ class Edge(models.Model):
  def __unicode__(self):
   return "{} -- {}".format(self.node1, self.node2)
 
+class Career(models.Model):
+ name = models.CharField(max_length=100, unique=True)
+ user = models.ForeignKey(User)
+ start_node = models.ForeignKey(Node)
+ hits = models.IntegerField(default = 0)
+
+ def __unicode__(self):
+  return "{} -- {}".format(self.node1, self.node2)
+
+
+class CareerNodeMap(models.Model):
+ node = models.ForeignKey(Node)
+ career = models.ForeignKey(Career)
+ user = models.ForeignKey(User)
+
+
 class Link(models.Model):
  url = models.CharField(max_length=300, unique=True)
  hits = models.IntegerField(default = 0)
@@ -33,10 +49,4 @@ class Link(models.Model):
  def __unicode__(self):
   return self.url
 
-class Career(models.Model):
- name = models.CharField(max_length=100, unique=True)
- start_node = models.ForeignKey(Node)
- hits = models.IntegerField(default = 0)
 
- def __unicode__(self):
-  return "{} -- {}".format(self.node1, self.node2)

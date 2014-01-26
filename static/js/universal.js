@@ -51,42 +51,6 @@ $("textarea").focusout(function(){
 	$(document).tooltip('enable');
  });
 
- $(document).on("submit", "#nodeForm", function(event) {
-  $(".errorlist").remove() // Remove any errors that exist.
-  form = $(this);
-  form_data = $(this).serialize()
-  $.post($(form).attr("action"), form_data, function(response) {
-   if (response!="0"){
-    $("#nodeForm").html(response)
-    setAutoComplete(".autocomplete")
-   } else {
-    $("form").find("input[type=text]").val("");
-    $("form").find("textarea").val("");
-    showRibbon("Leaf added!", goodColor, "body"); 
-   }
-  });
-  //Don't allow the original form to submit.
-  event.stopPropagation();
-  return false;
- })
-
-$(document).on("submit", "#careerForm", function(event) {
-  $(".errorlist").remove() // Remove any errors that exist.
-  form = $(this);
-  form_data = $(this).serialize()
-  $.post($(form).attr("action"), form_data, function(response) {
-   if (response!="0"){
-    $("#careerForm").html(response)
-   } else {
-    $("form").find("input[type=text]").val("");
-    showRibbon("Career added!", goodColor, "body");
-   }
-  });
-  //Don't allow the original form to submit.
-  event.stopPropagation();
-  return false;
- })
-
  //    Button-based Ajax     //
  $(document).on("click", ".upvoteButton", function (){
    var pid = $(this).attr("pid");
@@ -135,6 +99,15 @@ $('.kwicks').kwicks({
     });
 //$('.kwicks').kwicks('expand', 0);
 
+$('#userContainer li ul').hide().removeClass('fallback');
+$('userContainer li').hover(
+    function () {
+        $('ul', this).stop().slideDown(100);
+    },
+    function () {
+        $('ul', this).stop().slideUp(100);
+    }
+);
 });
 
 

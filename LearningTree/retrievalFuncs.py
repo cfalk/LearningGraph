@@ -18,8 +18,11 @@ def get_node(name):
 def get_user_nodes(user):
  return Node.objects.filter(user=user)
 
-# # # # # # # # #  # # # # # # # # # # # # # # # # # # 
+# # # # # # # # # # Link # # # # # # # # # # # # # # # # # 
 def get_link(link):
  return Link.objects.filter(url=name)[0]
+
+def get_career(name):
+ return Career.objects.filter(name=name)[0]
 
 

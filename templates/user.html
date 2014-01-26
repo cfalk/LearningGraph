@@ -1,12 +1,27 @@
 {% load url from future %}
 <div id="userContainer" class="unselectable">
  {% if user.is_authenticated %}
-  <a title="View nodes you added." href="/my_nodes/">My Nodes</a>
-  <a title="Add a new career type." href="/career_form/">Add Career</a>
-  <a title="Add a new leaf." href="/node_form/">Add Node</a>
-  <a href="/logout/">Log Out</a>
+  <ul class="user-menu">
+  	<li class="fallback">
+		<a>Careers</a>
+		<ul>
+			<li><a href="/my_careers/">My Careers</a></li>
+  			<li><a href="/add_careers/">Add Careers</a></li>
+  		</ul>
+	</li>
+	<li class="fallback">
+		<a>Nodes</a>
+		<ul>
+			<li><a href="/my_nodes/">My Nodes</a></li>
+  			<li><a href="/add_nodes/">Add Nodes</a></li>
+		</ul>
+	</li>
+	<li>
+		<a href="/logout/">Log Out</a>
+	</li>
+  </ul>
  {% else %}
   <a href="{% url 'social:begin' 'facebook' %}"><img class="loginImage" src="https://www.facebook.com/images/fb_icon_325x325.png" title="Facebook Login"></a>
-  <a href="{% url 'social:begin' 'google-oauth2' %}"><img height="40" width="auto" src="https://developers.google.com/+/images/branding/sign-in-buttons/White-signin_Short_base_44dp.png" title="Google Login"></a>
+  <a href="{% url 'social:begin' 'google-oauth2' %}"><img class="loginImage" src="http://2.bp.blogspot.com/-Z7i90yB0GaU/TZrFbbvO3eI/AAAAAAAAADw/50AKkB25KAQ/s1600/google2.png" title="Google Login"></a>
  {% endif %}
 </div>

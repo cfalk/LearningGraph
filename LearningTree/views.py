@@ -15,6 +15,22 @@ import random #TODO / Note from Casey: This was acting up for some reason.
 def info_page(request, page):
  return render(request, "info_page_global.html", {"template":page})
 
+def edit_node(request):
+ try:
+  #Variable Setup
+  u = request.user
+  n = Node.objects.get(id=request.GET["name"])
+
+  #Make sure the user owns the node.
+  assert u.is_authenticated() and n.user == u
+
+  n.content = request.GET["content"]
+  n.save()
+  return HttpResponse(0)
+ except Exception as e:
+  print e
+  return HttpResponse("Edit failed!") 
+
 def node(request):
  try:
   name = request.GET["node"]
@@ -25,6 +41,15 @@ def node(request):
   edges = None
  return render(request, "info_page_global.html", {"template":"node", "node":node, "edges":edges})
 
+def career(request):
+ try:
+  name = request.GET["career"]
+  career = get_career(name)
+ except:
+  career = None
+ print career
+ return render(request, "info_page_global.html", {"template":"career", "career":career})
+
 def random_node(request):
  random_idx = random.randint(0, Node.objects.count() - 1)
  node = Node.objects.all()[random_idx]
@@ -34,7 +59,6 @@ def random_node(request):
 
 def career_form(request):
  u = request.user
-
  if u.is_authenticated() and request.method=="POST":
   career = Career()
   career.user = u
@@ -43,24 +67,22 @@ def career_form(request):
 
   if form.is_valid():
    form.save()
-   return HttpResponse(0)
-  else:
-   return render(request, "career_form.html", {"form":form})
+   return render(request, "info_page_global.html", {"template":"career_form", "form":form, "addedCareer":career})
  else:
   form = CareerForm() 
- return render(request, "info_page_global.html", {"template":"career_form_page", "form":form})
+ return render(request, "info_page_global.html", {"template":"career_form", "form":form})
 
 def node_form(request):
  u = request.user
  
  if u.is_authenticated() and request.method=="POST":
-  try: 
-   node= Node()
-   node.user = u
-   form = NodeForm(request.POST, instance=node) 
+  node= Node()
+  node.user = u
+  form = NodeForm(request.POST, instance=node) 
+  if form.is_valid():
+   #Variable Setup
    form.save()
-   assert form.is_valid()
-   
+
    #Make the edges if edges are supplied.
    if request.POST.get("related[]"):
     related_nodes = request.POST.getlist("related[]")
@@ -69,12 +91,10 @@ def node_form(request):
       new_edge(node.name, name)
      except Exception as e:
       pass
-   return HttpResponse(0)
-  except:
-   return render(request, "node_form.html", {"form":form})
+   return render(request, "info_page_global.html", {"template":"node_form", "form":form, "addedNode":node})
  else:
   form = NodeForm() 
- return render(request, "info_page_global.html", {"template":"node_form_page", "form":form})
+ return render(request, "info_page_global.html", {"template":"node_form", "form":form})
  
 def login(request):
  if request.user.is_authenticated():
@@ -105,6 +125,8 @@ def add_career(request):
   form = CareerForm()
  return render(request, "info_page_global.html", {"template":"career_form", "form":form}) 
 
+
+
 # # # # # # # # # # # # # AJAX Requests # # # # # # # # # # 
 def get_node_names(request):
  node_names = [unicode(entry.name) for entry in Node.objects.all()]
@@ -112,10 +134,15 @@ def get_node_names(request):
 
 def get_edge_pairs(request):
  try:
-  edges = [[unicode(edge.node1), unicode(edge.node2)] for edge in get_all_edges()]
-  return HttpResponse(json.dumps(edges), content_type="application/json")
+  name = request.GET.get("node")
+  if name:
+   n = get_node(n)
+   dirty_edges = get_node_edges(node)
+  else:
+   dirty_edges = get_all_edges()
+
+  edge_list = [[unicode(edge.node1), unicode(edge.node2)] for edge in get_all_edges()]
+  return HttpResponse(json.dumps(edge_list), content_type="application/json")
  except Exception as e:
   print e
- 
-
 

@@ -95,30 +95,56 @@ form {
  color:#003300;
  font-size: 56px;
  font-weight:bold;
- margin-top:100px;
+ margin-top:120px;
 }
 
 #footer {
+ bottom:10px;
+ width:100%;
  text-align:center;
  font-size:14px;
- margin-top:25px; 
 }
 
 #search {
  height:70px;
  width: 350px;
- margin-bottom:200px;
+ margin-bottom:178px;
  font-size:42px;
  border-radius:5px;
  border-top-left-radius:10px;
 }
 
-#node {
- border-radius:40px;
+/*                                  User Template             */
+.user-menu {
+ margin:0px;
+ margin-right:10px;
+}
+
+.user-menu li {
+ display:inline-block;
+}
+
+.fallback ul {
  background-color:white;
- height: 100%;
- margin-left: 2%;
- margin-right: 2%;
+}
+
+/*                                  Node Template             */
+#node {
+ position:relative;
+ width:80%;
+ padding:20px;
+ min-height:400px;
+ margin:0 auto;
+ border-radius:150px;
+ 
+ background-color:white;
+}
+
+#nodeContent {
+ width:80%;
+ height:80%;
+ margin: 0 auto;
+ background-color:green;
 }
 
 #buttontitle {
@@ -141,25 +167,34 @@ margin:10px;
 color:white;
 }
 
-.subheader {
- margin-bottom:50px;
+#subheader {
+ margin-top:8px;
+ margin-bottom:32px;
  text-align:center;
  padding-bottom:10px;
  font-size:30px;
- letter-spacing:15px;
+ letter-spacing:9px;
  font-weight:bold;
 }
 
-.errorlist {
- padding:10px 0px 10px 0px;
- width:100%;
- margin-top:10px;
- margin-bottom:5px;
- border-radius:10px;
- background-color:#FF8080;
- list-style:none;
+.smallSubHeader {
+ margin-top:8px;
+ margin-bottom:15px;
+ text-align:center;
+ font-size:24px;
+ letter-spacing:6px;
+ font-weight:bold;
 }
 
+.Abouttext {
+ font-size:20px;
+ font-family:Duru Sans;
+ margin-top:12px;
+ margin-bottom:15px;
+ margin-left:28px;
+ margin-right:28px;
+ text-align:center;
+}
 
 .ribbonMessage {
  position:fixed;
@@ -232,28 +267,6 @@ border:0;border-collapse:collapse;
 
 .kwicks > a:last-child { border-right:0px; } 
 
-#nodename {
-text-align: center;
-}
-
-#nodecontent {
- float: left;
- margin-left: 20px;
- width: 70%;
- height: 200px;
-}
-
-#noderate {
- float: right;
- margin-right: 50px;
- width: 30%;
- height: 200px;
-}
-
-#edges {
- margin-top: 20px;
-}
-
 .mynode {
  margin: 0 auto;
  padding: 10px;
@@ -272,4 +285,42 @@ text-align: center;
 .mynode-info {
 float: left;
 margin-right: 20%;
+}
+
+/*       Correctness Indicators          */
+.errorlist {
+ padding:10px 0px 10px 0px;
+ margin-top:10px;
+ margin-bottom:5px;
+ width:100%;
+
+ font-weight:bold;
+ background-color:#FF8080;
+ list-style:none;
+}
+
+.successToken {
+ padding:10px 0px 10px 0px;
+ margin-top:10px;
+ margin-bottom:5px;
+ width:100%;
+
+ font-weight:bold;
+ background-color:#B3FFFF;
+}
+
+.link {  
+stroke: #666;
+opacity: 0.6;
+stroke-width: 1.5px; 
+} 
+.node circle { 
+stroke: #fff; 
+opacity: 0.6;
+stroke-width: 1.5px; 
+} 
+text { 
+font: 20px serif; 
+opacity: 0.6;
+pointer-events: none; 
 }

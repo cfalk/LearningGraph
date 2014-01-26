@@ -1,31 +1,68 @@
+<!--
+<script type="text/javascript">
+	function display_markdown() {
+		var rawContent = $("#node_raw").val();
+		$("#node_saved").val(rawContent);
+		var converter = Markdown.getSanitizingConverter();
+		$("#nodecontent").html(converter.makeHtml(rawContent)).css("display","");
+	}
 
-<div class="subHeader unselectable">{{ node.name }}</div>
+	function saveContent() {
+		var rawContent = $("#node_raw").val();
+		$.ajax({type:"GET", url: "/edit_node/", data: { name: $("#node").attr("pid"), content: rawContent}}).done(function(msg) { alert(msg);});
+		$("#node_raw").css("display","none");
+		$("#edit_content").css("display","");
+		$("#save_content").css("display","none");
+		$("#cancel_edit").css("display","none");
+		display_markdown();
+	}
+	function editContent() {
+		$("#node_raw").css("display","");
+		$("#nodecontent").css("display","none");
+		$("#edit_content").css("display","none");
+		$("#save_content").css("display","");
+		$("#cancel_edit").css("display","");
+	}
+	function cancelEdit() {
+		$("#node_raw").val($("#node_saved").val());
+		$("#node_raw").css("display","none");
+		$("#edit_content").css("display", "");
+		$("#save_content").css("display", "none");
+		$("#cancel_edit").css("display","none");
+		display_markdown();
+	}
+
+	$(document).ready(function () {
+		display_markdown();
+		$("#edit_content").bind("click", editContent);
+		$("#save_content").bind("click", saveContent);
+		$("#cancel_edit").bind("click", cancelEdit);
+	});
+
+ </script>-->
+
 {% include "mainmenu.html" %}
-<div id="node" pid="{{node.id}}">
-	{% if node %}
-	<!--<h2 id=nodename>{{ node.name }}</h2>-->
-	<div id="nodecontent">
-		<p style="width: 70%"> {{ node.content }} </p>
-	</div>	
-	<div class==noderate>
-		<h3> Good </h3> {{ node.good }}
-		<h3> Bad </h3>	{{ node.bad }}
-	</div>
-	
-	<div id="edges">
-		<h2> Links </h2>
-		<ul id="nodeedge">
-			{% for edge in edges %}
-				{% if node.name == edge.node1 %}
-					<li pid="{{edge.id}}"> Name: {{ edge.node2 }} Link: {{ edge.link }} {{ edge.good }} {{ edge.bad }} </li>
-				{% else %}
-					<li pid="{{edge.id}}"> Name: {{ edge.node1 }}   Good: {{ edge.good}} Bad: {{ edge.bad }} </li>
-				{% endif %}
-			{% endfor %}
-		</ul>
-	</div>
-	{% else %}
-	Node not found!
 
-	{% endif %}
-</div>
+{% if node %}
+ <div id="node" pid="{{ node.id }}">
+  <div id="nodeName" class="smallSubHeader unselectable">{{ node.name }}</div>
+
+  <div id="nodeContent"> {{ node.content }} </div>
+  <div class="editButton">EDIT</div>
+  <div id="nodeStats">NONE</div>
+ 
+  <div id="nodeSideTools">
+   <div class="upvoteButton" attr="{{node.pid}}" model="node">
+    UP
+   </div>
+   <div class="downvoteButton" attr="{{node.pid}}" model="node">
+    Down
+   </div>
+  </div>
+  <div id="nodeGraph">GRAPH </div>
+
+ </div>
+{% else %}
+ <div class="errorlist">Node not found!</div>
+{% endif %}
+
