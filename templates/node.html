@@ -41,25 +41,43 @@
 
  </script>-->
 
+<!--
+
+
+
+
+-->
+
 {% include "mainmenu.html" %}
 
 {% if node %}
  <div id="node" pid="{{ node.id }}">
-  <div id="nodeName" class="smallSubHeader unselectable">{{ node.name }}</div>
-
-  <div id="nodeContent"> {{ node.content }} </div>
-  <div class="editButton">EDIT</div>
-  <div id="nodeStats">NONE</div>
- 
+  <div id="node_name" class="smallSubHeader">{{ node.name }}</div>
+  <div id="nodeContent">{{ node.content }}</div>
   <div id="nodeSideTools">
-   <div class="upvoteButton" attr="{{node.pid}}" model="node">
-    UP
+   <div class="cancelButton">
+    <img title="Cancel" class="button" src="http://icons.iconarchive.com/icons/custom-icon-design/office/256/edit-icon.png" />
    </div>
-   <div class="downvoteButton" attr="{{node.pid}}" model="node">
-    Down
+   <div class="editButton">
+    <img title="Edit" class="button" src="http://icons.iconarchive.com/icons/custom-icon-design/office/256/edit-icon.png" />
+   </div>
+   <div class="upvoteButton" pid="{{node.id}}" model="node">
+    <img title="Upvote" class="button" src="{{STATIC_URL}}images/upvote.png" />
+   </div>
+   <div id="nodeStats">{{rating}}</div>
+   <div class="downvoteButton button" pid="{{node.id}}" model="node">
+    <img title="Downvote" class="button" src="{{STATIC_URL}}images/downvote.png" />
    </div>
   </div>
-  <div id="nodeGraph">GRAPH </div>
+  <div class="container"></div>
+<script>
+
+$(document).ready(function () {
+ loadGraph({{ node.id}});
+});
+
+
+</script>
 
  </div>
 {% else %}

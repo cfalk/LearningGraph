@@ -32,7 +32,27 @@ $(document).ready(function() {
   }
  }
  //Right off the bat, load the autocomplete for 
+ // Enable jQuery Auto-Complete
+ var career_nodes;
+ function setCareerAutoComplete(object){
+  if (career_nodes !== undefined) {
+    $(object).autocomplete({
+     source: career_nodes
+    });
+  } else {
+   $.getJSON("/get_career_names/", function(data) {
+    career_nodes = data;
+    $(object).autocomplete({
+     source: data
+    });
+   })
+  }
+ }
+ //Right off the bat, load the autocomplete for 
+
+
  setAutoComplete(".autocomplete")
+ setCareerAutoComplete(".autocomplete_career")
 
  //Enable jQuery ToolTips (And disable when input is selected)
  $(document).tooltip();
@@ -56,14 +76,24 @@ $("textarea").focusout(function(){
    var pid = $(this).attr("pid");
    var model = $(this).attr("model");
    $.get("/vote/", {direction: "+", pid:pid, model:model}, function(response) {
-    alert(response) //Do something better...     
+    if (response!=0){
+     showRibbon(response, badColor, "body")
+    } else {
+     $("#nodeStats").html(parseInt($("#nodeStats").html())+1)
+     showRibbon("Vote counted!", goodColor, "body")
+    }
    });
  })
  $(document).on("click", ".downvoteButton", function (){
    var pid = $(this).attr("pid");
    var model = $(this).attr("model");
    $.get("/vote/", {direction: "-", pid:pid, model:model}, function(response) {
-    alert(response) //Do something better...     
+    if (response!=0){
+     showRibbon(response, badColor, "body")
+    } else {
+     $("#nodeStats").html(parseInt($("#nodeStats").html())-1)
+     showRibbon("Vote counted!", goodColor, "body")
+    }
    });
  })
 
@@ -99,15 +129,27 @@ $('.kwicks').kwicks({
     });
 //$('.kwicks').kwicks('expand', 0);
 
-$('#userContainer li ul').hide().removeClass('fallback');
-$('userContainer li').hover(
-    function () {
-        $('ul', this).stop().slideDown(100);
-    },
-    function () {
-        $('ul', this).stop().slideUp(100);
-    }
-);
+
+/*       Node Editing        */
+
+$(document).on("click", ".editButton", function (){
+ oldContent = $("#nodeContent").html();
+ $("#nodeContent").replaceWith("<textarea id=\"nodeContent\" name=\"content\">"
+   +oldContent+"</textarea>");
+ $(".cancelButton").show()
+ $(this).hide()
+});
+
+$(document).on("click", ".cancelButton", function (){
+ oldContent = $("#nodeContent").html();
+ $("#nodeContent").replaceWith("<textarea id=\"nodeContent\" name=\"content\">"
+   +oldContent+"</textarea>");
+ $(".cancelButton").show()
+ $(this).hide()
+});
+
+
+
 });
 
 

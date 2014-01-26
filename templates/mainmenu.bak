@@ -1,6 +1,6 @@
 <div id="swatchMenu">	
  <a href="/explore/"><div title="Explore and learn." class="swatch unselectable">Home</div></a>
- <a href="/random/"><div title="Pick a random leaf." class="swatch unselectable">Random</div></a>
+ <a href="/random/"><div title="Learn a random skill." class="swatch unselectable">Random</div></a>
  <a href="/about/"><div title="About the project." class="swatch unselectable">About</div></a>
 </div>
 

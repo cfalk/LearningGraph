@@ -1,11 +1,15 @@
-function loadGraph(){
+function loadGraph(title){
 var links = [];
 var link;
 var obj = {};
 
-var title = document.getElementById("subheader").innerHTML;
+if(!title){
+	url_appendage="";
+} else {
+	url_appendage="?pid="+title;
+}
 
-$.getJSON("/get_edges/?node="+title, function(data) {
+$.getJSON("/get_edges/"+url_appendage, function(data) {
  $.each(data, function(i, v){
 	links.push({
        		source : v[0],

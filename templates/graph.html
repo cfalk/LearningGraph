@@ -1,5 +1,23 @@
+
+
+
+
 {% include "header.html" %}
-<div id="subheader">Graph</div>
-{% include "mainmenu.html" %}
+
+<div id="subheader" class="unselectable">Graph</div>
 <div class="container" style="text-align:center;"></div>
-<script>loadGraph()</script>
+
+
+{% include "mainmenu.html" %}
+
+<script>
+
+$(document).ready(function () {
+
+var title = document.getElementById("subheader").innerHTML;
+loadGraph();
+
+});
+
+
+</script>

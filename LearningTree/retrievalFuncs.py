@@ -18,6 +18,9 @@ def get_node(name):
 def get_user_nodes(user):
  return Node.objects.filter(user=user)
 
+def get_user_careers(user):
+ return Career.objects.filter(user=user)
+
 # # # # # # # # # # Link # # # # # # # # # # # # # # # # # 
 def get_link(link):
  return Link.objects.filter(url=name)[0]
@@ -25,4 +28,11 @@ def get_link(link):
 def get_career(name):
  return Career.objects.filter(name=name)[0]
 
+def get_careernodemap_by_career(career):
+ return CareerNodeMap.objects.filter(career=career)
 
+def get_careernodemap_by_node(node):
+ return CareerNodeMap.objects.filter(node=node)
+
+def get_career_nodes(career):
+ return get_careerrodemap_by_career(career).values("career")

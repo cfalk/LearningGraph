@@ -28,9 +28,11 @@ urlpatterns = patterns('',
 
     #User-based perspectives.
     url(r'^my_nodes/?$', user_nodes),
+    url(r'^my_careers/?$', user_careers),
 
     #AJAX URLs
     url(r'^get_node_names/$', get_node_names),
     url(r'^get_edges/$', get_edge_pairs),
-
+    url(r'^get_career_names/$', get_career_names),
+    url(r'^vote/$', vote),
 )

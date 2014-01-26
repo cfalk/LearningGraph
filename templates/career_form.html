@@ -1,5 +1,5 @@
 {% include "header.html" %}
-<div class="subHeader unselectable">Add Career</div>
+<div id="subheader" class="unselectable">Add Career</div>
 {% include "mainmenu.html" %}
 
 {% if addedCareer %}
@@ -9,11 +9,11 @@
 <form id="careerForm" action="/career_form/" method="post">
  {% csrf_token %}
  {{ form.as_p }}
-<label for="start_node">Starting Node</label>
+<label for="start_node">Initial Skill Node</label>
  <div class="inputBlock">
 <input class="autocomplete" name="start_node" type="text">
  </div>
-<label for="related">Path:</label>
+<label for="related">Skills:</label>
  <div class="listInputContainer">
 <input class="autocomplete listInput" name="path[]" type="text">
  </div>

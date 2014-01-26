@@ -36,25 +36,30 @@ def node(request):
   name = request.GET["node"]
   node = get_node(name)
   edges = get_node_edges(node)
+  rating = node.good-node.bad
  except:
   node = None
   edges = None
- return render(request, "info_page_global.html", {"template":"node", "node":node, "edges":edges})
+  rating = None
+ return render(request, "info_page_global.html", {"template":"node", "node":node, "edges":edges, "rating":rating})
 
 def career(request):
  try:
   name = request.GET["career"]
   career = get_career(name)
+  careernodemap = get_careernodemap(name)
  except:
   career = None
+  careernodemap = None
  print career
- return render(request, "info_page_global.html", {"template":"career", "career":career})
+ return render(request, "info_page_global.html", {"template":"career", "career":career, "careernodemap":careernodemap})
 
 def random_node(request):
  random_idx = random.randint(0, Node.objects.count() - 1)
  node = Node.objects.all()[random_idx]
  edges = get_node_edges(node)
- return render(request, "info_page_global.html", {"template":"node", "node": node, "edge": edges})
+ rating = node.good-node.bad
+ return render(request, "info_page_global.html", {"template":"node", "node":node, "edges":edges, "rating":rating})
  
 
 def career_form(request):
@@ -67,6 +72,11 @@ def career_form(request):
 
   if form.is_valid():
    form.save()
+   if request.POST.get("path[]"):
+     related_nodes = request.POST.getlist("path[]")
+     for n in related_nodes:
+      cnm = CareerNodeMap(node=get_node(n), career = career, user = u)
+      cnm.save()
    return render(request, "info_page_global.html", {"template":"career_form", "form":form, "addedCareer":career})
  else:
   form = CareerForm() 
@@ -76,9 +86,9 @@ def node_form(request):
  u = request.user
  
  if u.is_authenticated() and request.method=="POST":
-  node= Node()
-  node.user = u
-  form = NodeForm(request.POST, instance=node) 
+  n= Node()
+  n.user = u
+  form = NodeForm(request.POST, instance=n) 
   if form.is_valid():
    #Variable Setup
    form.save()
@@ -88,10 +98,10 @@ def node_form(request):
     related_nodes = request.POST.getlist("related[]")
     for name in related_nodes:
      try:
-      new_edge(node.name, name)
+      new_edge(n.name, name)
      except Exception as e:
       pass
-   return render(request, "info_page_global.html", {"template":"node_form", "form":form, "addedNode":node})
+   return render(request, "info_page_global.html", {"template":"node_form", "form":form, "addedNode":n})
  else:
   form = NodeForm() 
  return render(request, "info_page_global.html", {"template":"node_form", "form":form})
@@ -125,6 +135,13 @@ def add_career(request):
   form = CareerForm()
  return render(request, "info_page_global.html", {"template":"career_form", "form":form}) 
 
+def user_careers(request):
+  u = request.user
+  if u.is_authenticated():
+   careers = get_user_careers(u)
+  else:
+   careers = None
+  return render(request, "info_page_global.html", {"template": "user_careers", "careers": careers})
 
 
 # # # # # # # # # # # # # AJAX Requests # # # # # # # # # # 
@@ -132,17 +149,46 @@ def get_node_names(request):
  node_names = [unicode(entry.name) for entry in Node.objects.all()]
  return HttpResponse(json.dumps(node_names), content_type="application/json")
 
+def get_career_names(request):
+ career_names = [unicode(entry.name) for entry in Career.objects.all()]
+ return HttpResponse(json.dumps(career_names), content_type="application/json")
+
 def get_edge_pairs(request):
  try:
-  name = request.GET.get("node")
-  if name:
-   n = get_node(n)
-   dirty_edges = get_node_edges(node)
+  pid = request.GET.get("pid")
+  if pid:
+   n = Node.objects.get(id=pid)
+   dirty_edges = get_node_edges(n)
   else:
    dirty_edges = get_all_edges()
 
-  edge_list = [[unicode(edge.node1), unicode(edge.node2)] for edge in get_all_edges()]
+  edge_list = [[unicode(edge.node1), unicode(edge.node2)] for edge in dirty_edges]
   return HttpResponse(json.dumps(edge_list), content_type="application/json")
  except Exception as e:
   print e
 
+def vote(request):
+ u = request.user
+ if u.is_authenticated():
+  #Variable Setup:
+  direction = request.GET["direction"] 
+  pid  = request.GET["pid"] 
+  model  = request.GET["model"] 
+
+  if model=="node": #TODO: Expand to other models.
+   data = Node.objects.get(id=pid)
+  else:
+   return HttpResponse("Illegal option.")
+
+
+  if direction=="+":
+   data.good += 1
+  elif direction=="-":
+   data.bad += 1
+  else:
+   return HttpResponse("Illegal option.")
+
+  data.save()
+  return HttpResponse(0)
+ else:
+  return HttpResponse("Please log in to vote.") 

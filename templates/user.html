@@ -1,25 +1,27 @@
 {% load url from future %}
 <div id="userContainer" class="unselectable">
  {% if user.is_authenticated %}
+<nav>
   <ul class="user-menu">
   	<li class="fallback">
-		<a>Careers</a>
+		<a href="#">My Stuff</a>
 		<ul>
 			<li><a href="/my_careers/">My Careers</a></li>
-  			<li><a href="/add_careers/">Add Careers</a></li>
+			<li><a href="/my_nodes/">My Skills</a></li>
   		</ul>
 	</li>
 	<li class="fallback">
-		<a>Nodes</a>
+		<a href="#">Add Stuff</a>
 		<ul>
-			<li><a href="/my_nodes/">My Nodes</a></li>
-  			<li><a href="/add_nodes/">Add Nodes</a></li>
+  			<li><a href="/node_form/">Add Skills</a></li>
+  			<li><a href="/career_form/">Add Careers</a></li>
 		</ul>
 	</li>
 	<li>
 		<a href="/logout/">Log Out</a>
 	</li>
   </ul>
+</nav>
  {% else %}
   <a href="{% url 'social:begin' 'facebook' %}"><img class="loginImage" src="https://www.facebook.com/images/fb_icon_325x325.png" title="Facebook Login"></a>
   <a href="{% url 'social:begin' 'google-oauth2' %}"><img class="loginImage" src="http://2.bp.blogspot.com/-Z7i90yB0GaU/TZrFbbvO3eI/AAAAAAAAADw/50AKkB25KAQ/s1600/google2.png" title="Google Login"></a>
