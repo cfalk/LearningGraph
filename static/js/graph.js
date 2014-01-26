@@ -58,6 +58,7 @@ var link = svg.selectAll(".link")
 .enter().append("line") 
 .attr("class", "link"); 
 
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 var node = svg.selectAll(".node") 
 .data(force.nodes()) 
 .enter().append("g") 
@@ -67,6 +68,18 @@ var node = svg.selectAll(".node")
 .on("click", dblclick)
 .on("dblclick", click)
 .call(force.drag); 
+}
+else {
+var node = svg.selectAll(".node") 
+.data(force.nodes()) 
+.enter().append("g") 
+.attr("class", "node") 
+.on("mouseover", mouseover) 
+.on("mouseout", mouseout) 
+.on("click", click)
+.on("dblclick", dblclick)
+.call(force.drag); 
+}
 
 node.append("circle") 
 .attr("r", 8) // function(d) { return d.views; })

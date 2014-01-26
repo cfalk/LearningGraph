@@ -248,7 +248,7 @@ form {
 }
 
 #mycareer-info p {
- overflow: scroll;
+ overflow: auto;
 }
 
 #pathbuttons {
@@ -402,7 +402,7 @@ margin-right:20px;
  padding: 10px;
  margin-top: 5px;
  margin-bottom: 10px; 
- height: 225px;
+ height: height;
  width: 80%;
  background-color: white;
  border-radius: 40px;
@@ -410,6 +410,10 @@ margin-right:20px;
 
 .mycareer-content{
  margin-right: 10px;
+}
+
+.mycareer-info p{
+ height: auto;
 }
 
 #careernodes ul {

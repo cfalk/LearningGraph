@@ -9,7 +9,7 @@
 	<p id="career_description"> {{ career.description }} </p>
 	<h2> Starting Skill </h2>
 	<a href="/node/?node={{ career.start_node }}">{{ career.start_node }} </a>
-	<h2> Other Skills </h2>
+	<h2> All Skills </h2>
         <ul>
         {% for cnm in careernodemap %}
 		<li><a href="/node/?node={{ cnm.node }}">{{ cnm.node }}</a></li>

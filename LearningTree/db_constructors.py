@@ -36,12 +36,12 @@ def new_careernodemap(node, career, user):
  try:
   node = get_node(node)
   career = get_career(career)
-  cnm = CareerNodeMap()
-  cnm.node = node
-  cnm.career = career
-  cnm.user = user
-  cnm.save()
-  return cnm
+  if not CareerNodeMap.objects.filter(node=node, career=career).exists():
+   cnm = CareerNodeMap()
+   cnm.node = node
+   cnm.career = career
+   cnm.user = user
+   cnm.save()
  except Exception as e:
   print e
   raise Exception("CareerNodeMap construction failed")
