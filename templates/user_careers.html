@@ -8,6 +8,8 @@
 		<a href ="/career/?career={{ career.name }}"style="margin-left: 20px;">
 		<h2 style="margin-left: 20px;">{{ career.name }}</h2>
 		</a>
+
+                <p class="career_description"> {{career.description }}</p>
 	</div>
 	<div>
 		<h2> Start Node: </h2>
@@ -15,6 +17,21 @@
 	</div>
 </div>
 {% endfor %}
+
+<script>
+
+$(document).ready(function () {
+ $(".career_description").map(
+   function() {
+    $(this).html(markdown($(this).html()));
+   });
+});
+
+function markdown(content) {
+   var converter = Markdown.getSanitizingConverter();
+   return converter.makeHtml(content);
+}
+</script>
 
 {% else %}
 

@@ -28,7 +28,9 @@ $(document).ready(function() {
     $(object).autocomplete({
      source: data,
      select: function(event, ui) {
-      window.location.href = "/node/?node=" + encodeURI(ui.item.label);
+      if ($(this).hasClass("autosubmit")) {
+       window.location.href = "/node/?node=" + encodeURI(ui.item.label);
+      }
     }
     });
    })
@@ -48,7 +50,9 @@ $(document).ready(function() {
     $(object).autocomplete({
      source: data,
      select: function(event, ui) {
-      window.location.href = "/career/?career=" + encodeURI(ui.item.label);
+      if ($(this).hasClass("autosubmit")) {
+       window.location.href = "/career/?career=" + encodeURI(ui.item.label);
+      }
       }
     });
    })

@@ -5,6 +5,8 @@
 <div id="careernodes">
 	{% if career %}
 	<div class="smallSubHeader">{{ career.name }}</div>
+	<h2> Description </h2>
+	<p id="career_description"> {{ career.description }} </p>
 	<h2> Starting Skill </h2>
 	<a href="/node/?node={{ career.start_node }}">{{ career.start_node }} </a>
 	<h2> Other Skills </h2>
@@ -13,6 +15,18 @@
 		<li><a href="/node/?node={{ cnm.node }}">{{ cnm.node }}</a></li>
 	{% endfor %}
         </ul>
+<script>
+
+$(document).ready(function () {
+ $("#career_description").html(markdown($("#career_description").html()));
+});
+
+function markdown(content) {
+   var converter = Markdown.getSanitizingConverter();
+   return converter.makeHtml(content);
+}
+</script>
+
 <!--
 	<h2> Beginner skills </h2>
   	<ul>

@@ -226,11 +226,11 @@ form {
 
 #careernodes {
  position:relative;
- width:80%;i
+ width:80%;
  padding:20px;
  margin:0 auto;
  border-radius:150px;
- 
+ height:auto;
  background-color:white;
 }
 

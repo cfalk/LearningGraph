@@ -3,8 +3,8 @@ from views import *
 
 urlpatterns = patterns('',
     #Basic Pages
-    url(r'^$', info_page, {"page":"welcome"}),
-    url(r'^welcome/?$', info_page, {"page":"GPS"}),
+    url(r'^$', info_page, {"page":"GPS"}),
+    url(r'^welcome/?$', info_page, {"page":"welcome"}),
 
     url(r'^explore/?$', info_page, {"page":"explore"}),
     url(r'^GPS/?$', info_page, {"page":"GPS"}),
