@@ -71,24 +71,22 @@ $("textarea").focusout(function(){
 	$(document).tooltip('enable');
  });
 
- function format_rating(nodeStats){ 
-  score = parseInt($("#nodeStats span").html());
-
+ function format_rating(nodeStats, score){ 
   if (score>0){
    $(this).addClass("goodColorText");
    $(this).removeClass("badColorText");
    $(this).removeClass("neutralColorText");
-
+   $(this).html("+"+String(score+1));
   } else if (score<0){
    $(this).addClass("badColorText");
    $(this).removeClass("goodColorText");
    $(this).removeClass("neutralColorText");
-
+   $(this).html("-"+String(score-1));
   } else {
    $(this).addClass("neutralColorText");
    $(this).removeClass("goodColorText");
    $(this).removeClass("badColorText");
-
+   $(this).html("0");
   }
  }
 
@@ -101,7 +99,7 @@ $("textarea").focusout(function(){
      showRibbon(response, badColor, "body")
     } else {
      score = parseInt($("#nodeStats span").html());
-     $("#nodeStats span").html("+"+String(score+1));
+     format_rating($("#nodeStats span", score));
      showRibbon("Thanks!", goodColor, "body");
     }
    });
