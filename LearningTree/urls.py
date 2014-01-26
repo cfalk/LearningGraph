@@ -10,7 +10,7 @@ urlpatterns = patterns('',
     url(r'^GPS/?$', info_page, {"page":"GPS"}),
     url(r'^about/?$', info_page, {"page":"about"}),
     url(r'^graph/?$',info_page, {"page":"graph"}),
-    url(r'^career/?$',info_page, {"page":"career"}),
+    url(r'^career/?$', career),
     #Node Views
     url(r'^node/?$', node),
     url(r'^random/?$', random_node),

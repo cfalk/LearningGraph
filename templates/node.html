@@ -9,7 +9,6 @@
 
 	function saveContent() {
 		var rawContent = $("#node_raw").val();
-		$.ajax({type:"GET", url: "/edit_node/", data: { name: $("#node").attr("pid"), content: rawContent}}).done(function(msg) { alert(msg);});
 		$("#node_raw").css("display","none");
 		$("#edit_content").css("display","");
 		$("#save_content").css("display","none");
@@ -56,7 +55,7 @@
   <div id="nodeContent">{{ node.content }}</div>
   <div id="nodeSideTools">
    <div class="cancelButton">
-    <img title="Cancel" class="button" src="http://icons.iconarchive.com/icons/custom-icon-design/office/256/edit-icon.png" />
+    <img title="Cancel" class="button" src="http://www.clker.com/cliparts/U/f/r/9/f/m/cancel-button-no-line-md.png" />
    </div>
    <div class="editButton">
     <img title="Edit" class="button" src="http://icons.iconarchive.com/icons/custom-icon-design/office/256/edit-icon.png" />
@@ -65,7 +64,7 @@
     <img title="Upvote" class="button" src="{{STATIC_URL}}images/upvote.png" />
    </div>
    <div id="nodeStats">{{rating}}</div>
-   <div class="downvoteButton button" pid="{{node.id}}" model="node">
+   <div class="downvoteButton" pid="{{node.id}}" model="node">
     <img title="Downvote" class="button" src="{{STATIC_URL}}images/downvote.png" />
    </div>
   </div>

@@ -134,21 +134,40 @@ $('.kwicks').kwicks({
 
 $(document).on("click", ".editButton", function (){
  oldContent = $("#nodeContent").html();
- $("#nodeContent").replaceWith("<textarea id=\"nodeContent\" name=\"content\">"
-   +oldContent+"</textarea>");
+ $("#nodeContent").replaceWith("<textarea id=\"nodeContent\" name=\"content\" "
+   +"oldContent=\""+oldContent+"\">"+oldContent+"</textarea>");
+ $(".sideButton").show()
  $(".cancelButton").show()
  $(this).hide()
 });
 
 $(document).on("click", ".cancelButton", function (){
- oldContent = $("#nodeContent").html();
- $("#nodeContent").replaceWith("<textarea id=\"nodeContent\" name=\"content\">"
-   +oldContent+"</textarea>");
- $(".cancelButton").show()
+ oldContent = $("#nodeContent").attr("oldContent");
+ $("#nodeContent").replaceWith("<div id=\"nodeContent\">"+oldContent+"</div>");
+ $(".editButton").show()
+ $(".saveButton").hide()
  $(this).hide()
 });
 
+$(document).on("click", ".saveButton", function (){
+ oldContent = $("#nodeContent").html();
 
+ $.ajax({
+  type:"GET", 
+  url: "/edit_node/", 
+  data: { 
+     name: $("#node").attr("pid"), 
+     content: oldContent}}).done(function(msg) {
+       if (msg!=0){
+        showRibbon("Failed!", goodColor, "body");
+        $(".cancelButton").trigger("click");
+       } else {
+        showRibbon("Saved!", goodColor, "body")
+        oldContent = $("#nodeContent").attr("oldContent");
+       }
+     });
+
+})
 
 });
 

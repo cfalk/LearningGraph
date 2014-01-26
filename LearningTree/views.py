@@ -47,12 +47,10 @@ def career(request):
  try:
   name = request.GET["career"]
   career = get_career(name)
-  careernodemap = get_careernodemap(name)
+  careernodemap = get_careernodemap_by_career(career)
  except:
   career = None
-  careernodemap = None
- print career
- return render(request, "info_page_global.html", {"template":"career", "career":career, "careernodemap":careernodemap})
+ return render(request, "info_page_global.html", {"template":"career", "career":career,"careernodemap":careernodemap})
 
 def random_node(request):
  random_idx = random.randint(0, Node.objects.count() - 1)

@@ -26,12 +26,13 @@ class Edge(models.Model):
 
 class Career(models.Model):
  name = models.CharField(max_length=100, unique=True)
+ description = models.CharField(max_length=600)
  user = models.ForeignKey(User)
  start_node = models.ForeignKey(Node)
  hits = models.IntegerField(default = 0)
 
  def __unicode__(self):
-  return "{} -- {}".format(self.node1, self.node2)
+  return self.name
 
 
 class CareerNodeMap(models.Model):

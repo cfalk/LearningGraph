@@ -64,6 +64,7 @@ nav ul ul {
 
 nav ul li:hover > ul {
 	display:block;
+	background-color:lightgrey;
 }
 
 form {
@@ -160,6 +161,11 @@ form {
  right:0px;
  width:75px;
  top:135px;
+}
+
+#nodeSideTools div {
+ padding:15px;
+
 }
 
 .cancelButton {

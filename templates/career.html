@@ -2,6 +2,12 @@
 <div id="subheader" class="unselectable">{{ career.name }}</div>
 {% include "mainmenu.html" %}
 <div id="careernodes">
+        <ul>
+        {% for cnm in careernodemap %}
+		<li><a href="node/?node={{ cnm.node }}">{{ cnm.node }}</a></li>
+	{% endfor %}
+        </ul>
+<!--
 	<h2> Beginner skills </h2>
   	<ul>
 	{% for node in nodes %}
@@ -26,6 +32,7 @@
 		{% endif %}
 	{% endfor %}
 	</ul>
+-->
 </div>
 
 
