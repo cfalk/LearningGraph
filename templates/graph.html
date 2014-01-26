@@ -1,3 +1,5 @@
+{% include "header.html" %}
+<div class="subheader">Graph</div>
 {% include "mainmenu.html" %}
 <style>
 .link {  
@@ -16,26 +18,22 @@ opacity: 0.6;
 pointer-events: none; 
 }
 </style> 
-<div class="header">Graph of Knowledge</div>
 <div class="container" style="text-align:center;"></div>
 
 <script> 
 var links = [];
-var test = [[1,2],[2,3]]
-
+var link;
 var obj = {};
 
 $.getJSON("/get_edges/", function(data) {
- alert(data)
-// $.each(data, function(i, v){
- //      obj[v.name] = v.value
-  // });
-
+ $.each(data, function(i, v){links.push({
+       source : v[0],
+       target : v[1]
+     })
+   });
  //});
-})
 
-
-links.append({"source": pair[0], "target":pair[1]});
+//links.append({"source": pair[0], "target":pair[1]});
  
 /*  var links = [ { "source" : "HTML", "target" : "CSS", "views" : 4 }, 
 { "source" : "CSS", "target" : "JavaScript", "views" : 5 },
@@ -53,14 +51,13 @@ links.append({"source": pair[0], "target":pair[1]});
  var width = 700 
  height = 600 ; 
 
+var nodes = [];
 // Compute the distinct nodes from the links.
 links.forEach(function(link) {
 link.source = nodes[link.source] || 
 (nodes[link.source] = {name: link.source});
 link.target = nodes[link.target] || 
 (nodes[link.target] = {name: link.target});
-link.views =  nodes[link.views] ||
-(nodes[link.views] = {views: link.views});
 link.value = +link.value;
 });
 
@@ -70,13 +67,13 @@ var force = d3.layout.force()
 .nodes(d3.values(nodes)) 
 .links(links) 
 .size([width, height]) 
-.linkDistance(80) 
+.linkDistance(120) 
 .charge(-400) 
 .on("tick", tick) 
 .start(); 
 
 var svg = d3.select("div.container").append("svg") 
-.attr("width", width) 
+.attr("width", "100%") 
 .attr("height", height); 
 
 var link = svg.selectAll(".link") 
@@ -103,6 +100,8 @@ node.append("text")
 .attr("dy", ".35em") 
 .style("fill", "steelblue")
 .text(function(d) { return d.name; }); 
+
+
 
 function tick() { 
 link 
@@ -154,7 +153,7 @@ d3.select(this).select("text").transition()
 .style("stroke", "none")
 .style("font", "20px serif");
 }
-
+})
 </script>
 
 <style>

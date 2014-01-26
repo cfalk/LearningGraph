@@ -239,11 +239,19 @@ text-align: center;
 #nodecontent {
  float: left;
  margin-left: 20px;
+ width: 70%;
+ height: 200px;
 }
 
 #noderate {
  float: right;
  margin-right: 50px;
+ width: 30%;
+ height: 200px;
+}
+
+#edges {
+ margin-top: 20px;
 }
 
 .mynode {

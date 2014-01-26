@@ -87,9 +87,25 @@ $(document).on("submit", "#careerForm", function(event) {
   return false;
  })
 
+ //    Button-based Ajax     //
+ $(document).on("click", ".upvoteButton", function (){
+   var pid = $(this).attr("pid");
+   var model = $(this).attr("model");
+   $.get("/vote/", {direction: "+", pid:pid, model:model}, function(response) {
+    alert(response) //Do something better...     
+   });
+ })
+ $(document).on("click", ".downvoteButton", function (){
+   var pid = $(this).attr("pid");
+   var model = $(this).attr("model");
+   $.get("/vote/", {direction: "-", pid:pid, model:model}, function(response) {
+    alert(response) //Do something better...     
+   });
+ })
+
 
  $(document).on("click", ".addListInputButton", function (){
-  var container = $(this).closest(".listInputcontainer");
+  var container = $(".listInputcontainer:last");
   $(container).clone().insertAfter($(container))
   setAutoComplete($(".autocomplete"))
   $(".listInputContainer:last").find("input[name=\"related[]\"]").val("");

@@ -25,10 +25,11 @@ def node(request):
   edges = None
  return render(request, "info_page_global.html", {"template":"node", "node":node, "edges":edges})
 
-def random(request):
- node = random.choice(Node.objects.all())
+def random_node(request):
+ random_idx = random.randint(0, Node.objects.count() - 1)
+ node = Node.objects.all()[random_idx]
  edges = get_node_edges(node)
- return render(request, "node.html", {"node": node, "edges":edges})
+ return render(request, "info_page_global.html", {"template":"node", "node": node, "edge": edges})
  
 
 def career_form(request):
@@ -106,18 +107,15 @@ def add_career(request):
 
 # # # # # # # # # # # # # AJAX Requests # # # # # # # # # # 
 def get_node_names(request):
- try:
-  node_names = [unicode(entry.name) for entry in Node.objects.all()]
-  return HttpResponse(json.dumps(node_names), content_type="application/json")
- except Exception as e:
-  print e
+ node_names = [unicode(entry.name) for entry in Node.objects.all()]
+ return HttpResponse(json.dumps(node_names), content_type="application/json")
 
 def get_edge_pairs(request):
  try:
   edges = [[unicode(edge.node1), unicode(edge.node2)] for edge in get_all_edges()]
   return HttpResponse(json.dumps(edges), content_type="application/json")
- except:
-  pass
-
+ except Exception as e:
+  print e
+ 
 
 

@@ -4,19 +4,20 @@
 <div id="node" pid="{{node.id}}">
 	{% if node %}
 	<!--<h2 id=nodename>{{ node.name }}</h2>-->
-	<div id="nodecontent" style="float: left; margin-left: 30px; width: 70%">
+	<div id="nodecontent">
 		<p style="width: 70%"> {{ node.content }} </p>
 	</div>	
-		<div=noderate style="float: right; margin-right: 50px;">
-			<h3> Good </h3> {{ node.good }}
-			<h3> Bad </h3>	{{ node.bad }}
-		 </div>
+	<div class==noderate>
+		<h3> Good </h3> {{ node.good }}
+		<h3> Bad </h3>	{{ node.bad }}
 	</div>
+	
 	<div id="edges">
+		<h2> Links </h2>
 		<ul id="nodeedge">
 			{% for edge in edges %}
 				{% if node.name == edge.node1 %}
-					<li pid="{{edge.id}}"> Name: {{ edge.node2 }}  {{ edge.good }} {{ edge.bad }} </li>
+					<li pid="{{edge.id}}"> Name: {{ edge.node2 }} Link: {{ edge.link }} {{ edge.good }} {{ edge.bad }} </li>
 				{% else %}
 					<li pid="{{edge.id}}"> Name: {{ edge.node1 }}   Good: {{ edge.good}} Bad: {{ edge.bad }} </li>
 				{% endif %}

@@ -13,7 +13,7 @@ urlpatterns = patterns('',
 
     #Node Views
     url(r'^node/?$', node),
-    url(r'^random/?$', random),
+    url(r'^random/?$', random_node),
 
     #Authentication
     url(r'^login/?$', login),
