@@ -35,4 +35,7 @@ def get_careernodemap_by_node(node):
  return CareerNodeMap.objects.filter(node=node)
 
 def get_career_nodes(career):
- return get_careerrodemap_by_career(career).values("career")
+ return get_careerrodemap_by_career(career=career).values("node")
+
+def get_node_careers(node):
+ return get_careerrodemap_by_career(node=node).values("career")
