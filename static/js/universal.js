@@ -26,7 +26,10 @@ $(document).ready(function() {
    $.getJSON("/get_node_names/", function(data) {
     node_names = data;
     $(object).autocomplete({
-     source: data
+     source: data,
+     select: function(event, ui) {
+      window.location.href = "/node/?node=" + encodeURI(ui.item.label);
+    }
     });
    })
   }
@@ -43,7 +46,10 @@ $(document).ready(function() {
    $.getJSON("/get_career_names/", function(data) {
     career_nodes = data;
     $(object).autocomplete({
-     source: data
+     source: data,
+     select: function(event, ui) {
+      window.location.href = "/career/?career=" + encodeURI(ui.item.label);
+      }
     });
    })
   }
@@ -73,20 +79,20 @@ $("textarea").focusout(function(){
 
  function format_rating(nodeStats, score){ 
   if (score>0){
-   $(this).addClass("goodColorText");
-   $(this).removeClass("badColorText");
-   $(this).removeClass("neutralColorText");
-   $(this).html("+"+String(score+1));
+   $(nodeStats).addClass("goodColorText");
+   $(nodeStats).removeClass("badColorText");
+   $(nodeStats).removeClass("neutralColorText");
+   $(nodeStats).html("+"+String(score));
   } else if (score<0){
-   $(this).addClass("badColorText");
-   $(this).removeClass("goodColorText");
-   $(this).removeClass("neutralColorText");
-   $(this).html("-"+String(score-1));
+   $(nodeStats).addClass("badColorText");
+   $(nodeStats).removeClass("goodColorText");
+   $(nodeStats).removeClass("neutralColorText");
+   $(nodeStats).html(String(score));
   } else {
-   $(this).addClass("neutralColorText");
-   $(this).removeClass("goodColorText");
-   $(this).removeClass("badColorText");
-   $(this).html("0");
+   $(nodeStats).addClass("neutralColorText");
+   $(nodeStats).removeClass("goodColorText");
+   $(nodeStats).removeClass("badColorText");
+   $(nodeStats).html("0");
   }
  }
 
@@ -99,7 +105,7 @@ $("textarea").focusout(function(){
      showRibbon(response, badColor, "body")
     } else {
      score = parseInt($("#nodeStats span").html());
-     format_rating($("#nodeStats span", score));
+     format_rating($("#nodeStats span"), score+1);
      showRibbon("Thanks!", goodColor, "body");
     }
    });
@@ -111,7 +117,8 @@ $("textarea").focusout(function(){
     if (response!=0){
      showRibbon(response, badColor, "body")
     } else {
-     $("#nodeStats").html(parseInt($("#nodeStats").html())-1)
+     score = parseInt($("#nodeStats span").html());
+     format_rating($("#nodeStats span"), score-1);
      showRibbon("Thanks!", goodColor, "body")
     }
    });
@@ -202,7 +209,7 @@ function markdown(content) {
 $(document).on("click", ".editButton", function (){
  var oldContent = $("#rawContent").html();
  $("#nodeContent").replaceWith("<textarea id=\"nodeContent\" name=\"content\" "
-   +"oldContent=\""+oldContent+"\">"+oldContent+"</textarea>");
+   +"oldContent=\""+oldContent+"\" title=\"Use Markdown here.  A link would be[link name](http://url\")>"+oldContent+"</textarea>");
  $(".saveButton").show()
  $(".cancelButton").show()
  $(this).hide()

@@ -7,15 +7,30 @@
 <div class="mynode">
 <div class=mynode-info>
 <h2 style="margin-left: 20px;"><a href="/node/?node={{ node.name }}">{{ node.name }}</a></h2>
-<h3 style="margin-left: 20px;"> Votes </h3>
+<h3 style="margin-left: 20px;"> Total Votes </h3>
 <p style="margin-left: 20px;"> Good {{ node.good }} </p>
 <p style="margin-left: 20px;"> Bad {{ node.bad }} </p>
 </div>
-<div class=mynode-content>
-<p>{{ node.content }}</p>
+<div class="mynode-content">
+<p class="mynode-p">{{ node.content }}</p>
 </div>
 </div>
 {% endfor %}
+
+<script>
+
+$(document).ready(function () {
+ $(".mynode > .mynode-content > .mynode-p").map(
+   function() {
+    $(this).html(markdown($(this).html()));
+   });
+});
+
+function markdown(content) {
+   var converter = Markdown.getSanitizingConverter();
+   return converter.makeHtml(content);
+}
+</script>
 
 {% else %}
 

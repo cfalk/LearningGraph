@@ -10,7 +10,7 @@ from forms import *
 from db_constructors import *
 from retrievalFuncs import *
 
-import random #TODO / Note from Casey: This was acting up for some reason.
+import random
 
 def info_page(request, page):
  return render(request, "info_page_global.html", {"template":page})
@@ -33,15 +33,14 @@ def edit_node(request):
   print "ERROR: {}".format(e)
   return HttpResponse("Edit failed!") 
 
+#Helper Function to format ratings.
 def format_rating(rating):
- print rating
  if rating > 0:
   rating = "<span class=\"goodColorText\">+{}</span>".format(rating)
  elif rating < 0:
   rating = "<span class=\"badColorText\">{}</span>".format(rating)
  else:
   rating = "<span class=\"neutralColorText\">0</span>"
- print rating
  return rating
 
 def node(request):

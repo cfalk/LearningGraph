@@ -3,7 +3,7 @@ var links = [];
 var link;
 var obj = {};
 var width=700;
-var height = 400;
+var height = 600;
 var career_appendage = "";
 var career = document.getElementById("career");
 
@@ -51,7 +51,7 @@ var force = d3.layout.force()
 
 var svg = d3.select("div.container").append("svg") 
 .attr("width", "90%") 
-.attr("height", height); 
+.attr("height", height);
 
 var link = svg.selectAll(".link") 
 .data(force.links()) 

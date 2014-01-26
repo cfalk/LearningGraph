@@ -5,7 +5,7 @@
  <div id="node" pid="{{ node.id }}">
   <div id="career" style="display:none">{{ career }}</div>
   <div class="smallSubHeader">{{ node.name }}</div>
-  <div id="nodeContent" title="You can use markdown. Include links with [link title](http://url.com)"></div>
+  <div id="nodeContent"></div>
   <div id="rawContent" style="display:none">{{ node.content }}</div>
   <div id="nodeSideTools">
    <div class="saveButton">
@@ -45,6 +45,6 @@ function markdown(content) {
 
  </div>
 {% else %}
- <div class="errorlist">Node not found!</div>
+ <div class="errorlist">Skill not found!</div>
 {% endif %}
 
