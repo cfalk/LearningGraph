@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 class Node(models.Model):
  #Content Information
  name = models.CharField(max_length=100, unique=True)
- content = models.CharField(max_length=600)
+ content = models.CharField(max_length=2000)
  user = models.ForeignKey(User)
 
  #Rating Information
@@ -26,7 +26,7 @@ class Edge(models.Model):
 
 class Career(models.Model):
  name = models.CharField(max_length=100, unique=True)
- description = models.CharField(max_length=600)
+ description = models.CharField(max_length=2000)
  user = models.ForeignKey(User)
  start_node = models.ForeignKey(Node)
  hits = models.IntegerField(default = 0)
@@ -40,6 +40,10 @@ class CareerNodeMap(models.Model):
  career = models.ForeignKey(Career)
  user = models.ForeignKey(User)
 
+class CareerEdgeMap(models.Model):
+ edge = models.ForeignKey(Edge)
+ career = models.ForeignKey(Career)
+ user = models.ForeignKey(User)
 
 class Link(models.Model):
  url = models.CharField(max_length=300, unique=True)

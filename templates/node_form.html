@@ -9,10 +9,14 @@
 <form id="nodeForm" action="/node_form/" method="post">
  {% csrf_token %}
  {{ form.as_p }}
- <label for="related">Related:</label>
- <div class="listInputContainer">
-<input class="autocomplete listInput" name="related[]" type="text">
- </div>
+<label for="related">Related:</label>
+<ul class="sortable"> 
+<li>
+  <div class="listInputContainer">
+  <input class="autocomplete listInput" name="related[]" title="Related Skills" type="text">
+  </div>
+ </li>
+</ul>
 
  <input type="submit" value="Submit" />
 </form>

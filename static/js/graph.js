@@ -2,14 +2,24 @@ function loadGraph(title){
 var links = [];
 var link;
 var obj = {};
+var width=700;
+var height = 400;
+var career_appendage = "";
+var career = document.getElementById("career");
+
+if(career){
+	var carText = career.innerHTML;
+	career_appendage="&?career="+carText;
+}
 
 if(!title){
 	url_appendage="";
 } else {
 	url_appendage="?pid="+title;
+	height=300;
 }
 
-$.getJSON("/get_edges/"+url_appendage, function(data) {
+$.getJSON("/get_edges/"+url_appendage+career_appendage, function(data) {
  $.each(data, function(i, v){
 	links.push({
        		source : v[0],
@@ -17,8 +27,6 @@ $.getJSON("/get_edges/"+url_appendage, function(data) {
     	 })	
    });
  
- var width = 700 
- height = 600 ; 
 
 var nodes = [];
 // Compute the distinct nodes from the links.
@@ -37,7 +45,7 @@ var force = d3.layout.force()
 .links(links) 
 .size([width, height]) 
 .linkDistance(120) 
-.charge(-400) 
+.charge(-300) 
 .on("tick", tick) 
 .start(); 
 

@@ -1,0 +1,24 @@
+{% include "header.html" %}
+<div id="subheader" class="unselectable">Add Edge</div>
+{% include "mainmenu.html" %}
+
+{% if fatalMessage %}
+<div class="failToken"> {{ fatalMessage }} </div>
+{% elif success %}
+<div class="successToken">Skills connected!</div>
+{% endif %}
+
+<form id="edgeForm" action="/edge_form/" method="post">
+ {% csrf_token %}
+
+<label>Skills to Connect:</label>
+
+<p>
+<input class="autocomplete" name="node1" type="text">
+</p>
+<p>
+<input class="autocomplete" name="node2" type="text">
+</p>
+
+<input type="submit" value="Connect" />
+</form>

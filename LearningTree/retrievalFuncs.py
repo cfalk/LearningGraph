@@ -13,6 +13,7 @@ def get_all_edges():
 
 # # # # # # # # # Node # # # # # # # # # # # # # # # # # # 
 def get_node(name):
+ if type(name)==Node: return name
  return Node.objects.filter(name=name)[0]
 
 def get_user_nodes(user):
@@ -23,11 +24,14 @@ def get_user_careers(user):
 
 # # # # # # # # # # Link # # # # # # # # # # # # # # # # # 
 def get_link(link):
- return Link.objects.filter(url=name)[0]
+ if type(link)==Link: return link
+ return Link.objects.filter(url=link)[0]
 
 def get_career(name):
+ if type(name)==Career: return name
  return Career.objects.filter(name=name)[0]
 
+# # # # # # # # # #  # # # # # # # # # # # # # # # # # 
 def get_careernodemap_by_career(career):
  return CareerNodeMap.objects.filter(career=career)
 

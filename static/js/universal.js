@@ -71,6 +71,27 @@ $("textarea").focusout(function(){
 	$(document).tooltip('enable');
  });
 
+ function format_rating(nodeStats){ 
+  score = parseInt($("#nodeStats span").html());
+
+  if (score>0){
+   $(this).addClass("goodColorText");
+   $(this).removeClass("badColorText");
+   $(this).removeClass("neutralColorText");
+
+  } else if (score<0){
+   $(this).addClass("badColorText");
+   $(this).removeClass("goodColorText");
+   $(this).removeClass("neutralColorText");
+
+  } else {
+   $(this).addClass("neutralColorText");
+   $(this).removeClass("goodColorText");
+   $(this).removeClass("badColorText");
+
+  }
+ }
+
  //    Button-based Ajax     //
  $(document).on("click", ".upvoteButton", function (){
    var pid = $(this).attr("pid");
@@ -79,8 +100,9 @@ $("textarea").focusout(function(){
     if (response!=0){
      showRibbon(response, badColor, "body")
     } else {
-     $("#nodeStats").html(parseInt($("#nodeStats").html())+1)
-     showRibbon("Vote counted!", goodColor, "body")
+     score = parseInt($("#nodeStats span").html());
+     $("#nodeStats span").html("+"+String(score+1));
+     showRibbon("Thanks!", goodColor, "body");
     }
    });
  })
@@ -92,19 +114,50 @@ $("textarea").focusout(function(){
      showRibbon(response, badColor, "body")
     } else {
      $("#nodeStats").html(parseInt($("#nodeStats").html())-1)
-     showRibbon("Vote counted!", goodColor, "body")
+     showRibbon("Thanks!", goodColor, "body")
     }
    });
  })
 
 
  $(document).on("click", ".addListInputButton", function (){
-  var container = $(".listInputcontainer:last");
-  $(container).clone().insertAfter($(container))
-  setAutoComplete($(".autocomplete"))
-  $(".listInputContainer:last").find("input[name=\"related[]\"]").val("");
-  $(this).remove()
+  var container = $(".listInputcontainer:last").closest("li");
+  if ($(container).find(".listInput").val()){
+   $(container).clone().insertAfter($(container))
+   setAutoComplete($(".autocomplete"))
+   $(".listInputContainer:last").find(".listInput").val("");
+   $(this).remove()
+   
+   $(".sortable").sortable({
+    stop: function () {
+     // enable text select on inputs
+     $(".sortable").find("input")
+      .bind('mousedown.ui-disableSelection selectstart.ui-disableSelection', function(e) {
+       e.stopImmediatePropagation();
+     });
+   }
+   }).disableSelection();
+
+   // enable text select on inputs
+   $(".sortable").find("input")
+    .bind('mousedown.ui-disableSelection selectstart.ui-disableSelection', function(e) {
+    e.stopImmediatePropagation();
+   });
+
+  }
  });
+
+ $(document).on("click", ".addListInputButton2", function (){
+  var container = $(".listInputcontainer2:last").closest("li");
+  if ($(container).find(".listInput").val()){
+   $(container).clone().insertAfter($(container))
+   setAutoComplete($(".autocomplete"))
+   $(".listInputContainer2:last").find(".listInput").val("");
+   $(this).remove()
+
+  }
+ });
+
 
  $(document).on("mouseenter", ".listInputContainer", function(){
    if (!$(".addListInputButton").length) {
@@ -118,6 +171,17 @@ $("textarea").focusout(function(){
  });
 
 
+ $(document).on("mouseenter", ".listInputContainer2", function(){
+   if (!$(".addListInputButton").length) {
+    $(this).append("<div class=\"addListInputButton2\" title=\""
+     + "Add another related node.\">+</div>");
+   }
+  })
+ 
+ $(document).on("mouseleave", ".listInputContainer2", function(){
+   $(".addListInputButton2").remove();
+ });
+
 
 $('.kwicks').kwicks({
 	maxSize: "21%",
@@ -129,45 +193,69 @@ $('.kwicks').kwicks({
     });
 //$('.kwicks').kwicks('expand', 0);
 
+function markdown(content) {
+   var converter = Markdown.getSanitizingConverter();
+   return converter.makeHtml(content);
+}
+
 
 /*       Node Editing        */
 
 $(document).on("click", ".editButton", function (){
- oldContent = $("#nodeContent").html();
+ var oldContent = $("#rawContent").html();
  $("#nodeContent").replaceWith("<textarea id=\"nodeContent\" name=\"content\" "
    +"oldContent=\""+oldContent+"\">"+oldContent+"</textarea>");
- $(".sideButton").show()
+ $(".saveButton").show()
  $(".cancelButton").show()
  $(this).hide()
 });
 
 $(document).on("click", ".cancelButton", function (){
- oldContent = $("#nodeContent").attr("oldContent");
- $("#nodeContent").replaceWith("<div id=\"nodeContent\">"+oldContent+"</div>");
+ var oldContent = $("#nodeContent").attr("oldContent");
+ $("#nodeContent").replaceWith("<div id=\"nodeContent\">"+markdown(oldContent)+"</div>");
  $(".editButton").show()
  $(".saveButton").hide()
  $(this).hide()
 });
 
 $(document).on("click", ".saveButton", function (){
- oldContent = $("#nodeContent").html();
-
+ var newContent = $("#nodeContent").val();
+ $("#rawContent").html(newContent);
  $.ajax({
   type:"GET", 
   url: "/edit_node/", 
   data: { 
      name: $("#node").attr("pid"), 
-     content: oldContent}}).done(function(msg) {
+     content: newContent}}).done(function(msg) {
        if (msg!=0){
-        showRibbon("Failed!", goodColor, "body");
-        $(".cancelButton").trigger("click");
+        showRibbon(msg, badColor, "body");
        } else {
         showRibbon("Saved!", goodColor, "body")
-        oldContent = $("#nodeContent").attr("oldContent");
+        $(".saveButton").hide()
+        $(".cancelButton").hide()
+        $(".editButton").show()
+        $("#nodeContent").replaceWith("<div id=\"nodeContent\">"+markdown(newContent)+"</div>");
        }
      });
 
 })
+
+$(".sortable").sortable({
+  stop: function () {
+    // enable text select on inputs
+    $(".sortable").find("input")
+     .bind('mousedown.ui-disableSelection selectstart.ui-disableSelection', function(e) {
+      e.stopImmediatePropagation();
+    });
+  }
+}).disableSelection();
+
+// enable text select on inputs
+$(".sortable").find("input")
+ .bind('mousedown.ui-disableSelection selectstart.ui-disableSelection', function(e) {
+  e.stopImmediatePropagation();
+});
+
 
 });
 

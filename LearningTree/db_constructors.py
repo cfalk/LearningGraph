@@ -27,6 +27,51 @@ def new_edge(name1, name2):
   #Save the new node.
   e = Edge(node1=n1, node2=n2)
   e.save()
+  return e
  except Exception as e:
   print "Edge construct failed: {}".format(e)
+  raise Exception("Edge construction failed.")
+
+def new_careernodemap(node, career, user):
+ try:
+  node = get_node(node)
+  career = get_career(career)
+  cnm = CareerNodeMap()
+  cnm.node = node
+  cnm.career = career
+  cnm.user = user
+  cnm.save()
+  return cnm
+ except Exception as e:
+  print e
+  raise Exception("CareerNodeMap construction failed")
+
+#Create a new edge and apply it to a career.
+def new_careeredgemap(node1, node2, career, user):
+ try:
+  #Variable Setup
+  cem = CareerEdgeMap(user=user, career=career)
+  n1 = get_node(node1)
+  n2 = get_node(node2)
+
+  #Either get the edge or make a new edge.
+  try:
+   e = get_edges(n1,n2)[0]
+  except:
+   #Create the Edge
+   e = new_edge(n1, n2)
+  assert e #Make sure an edge was collected
+
+  #Make a CareerNodeObject for each node.
+  new_careernodemap(n1, career, user)
+  new_careernodemap(n2, career, user)
+  
+  cem.edge = e
+  cem.save()
+  return cem
+ except Exception as e:
+  print e
+  raise Exception("CareerNodeMap construction failed")
+
+
 

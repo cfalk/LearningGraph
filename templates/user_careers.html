@@ -1,22 +1,24 @@
 {% include "header.html" %}
+<div id="subheader">My Careers</div>
 {% include "mainmenu.html" %}
 {% if careers %}
 {% for career in careers %}
 <div class="mycareer">
 	<div class=mycareer-info>
-		<h2 style="margin-left: 20px;">Career Name: {{ career.name }}</h2>
-		<a href ="/career/?career={{ career.name }}"style="margin-left: 20px;">Visit Career</a>
+		<a href ="/career/?career={{ career.name }}"style="margin-left: 20px;">
+		<h2 style="margin-left: 20px;">{{ career.name }}</h2>
+		</a>
 	</div>
 	<div>
 		<h2> Start Node: </h2>
-		<a href="/node/?node={{ career.start_node }}"> {{ career.start_node }} </a>
+		<a href="/node/?node={{ career.start_node|urlencode }}&career={{ career.name|urlencode }}"> {{ career.start_node }} </a>
 	</div>
 </div>
 {% endfor %}
 
 {% else %}
 
-<p>You don't have any nodes. <a href="/node_form/">Make one?</a>
+<p>You don't have any nodes. <a href="/career_form/">Make one?</a>
 
 {% endif %}
 

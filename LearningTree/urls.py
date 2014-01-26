@@ -24,6 +24,7 @@ urlpatterns = patterns('',
     #Model Construction/Editing
     url(r'^node_form/?$', node_form),
     url(r'^career_form/?$', career_form),
+    url(r'^edge_form/?$', edge_form),
     url(r'^edit_node/$', edit_node),
 
     #User-based perspectives.

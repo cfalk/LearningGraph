@@ -1,10 +1,16 @@
 
-<div id="subheader" class="unselectable">{{ career.name }}</div>
+{% include "header_high.html" %}
+<div id="subheader" class="unselectable">Careers</div>
 {% include "mainmenu.html" %}
 <div id="careernodes">
+	{% if career %}
+	<div class="smallSubHeader">{{ career.name }}</div>
+	<h2> Starting Skill </h2>
+	<a href="/node/?node={{ career.start_node }}">{{ career.start_node }} </a>
+	<h2> Other Skills </h2>
         <ul>
         {% for cnm in careernodemap %}
-		<li><a href="node/?node={{ cnm.node }}">{{ cnm.node }}</a></li>
+		<li><a href="/node/?node={{ cnm.node }}">{{ cnm.node }}</a></li>
 	{% endfor %}
         </ul>
 <!--
@@ -33,6 +39,9 @@
 	{% endfor %}
 	</ul>
 -->
+	{% else %}
+	<div class="errorlist">Career not found!</div>
+	{% endif %}
 </div>
 
 

@@ -14,6 +14,10 @@ body {
  margin:0px;
 }
 
+textarea {
+resize:none;
+}
+
 input, textarea {
  border:2px solid #B3FFB3;
  border-radius:10px;
@@ -58,13 +62,29 @@ a:hover {
  cursor:pointer;
 }
 
-nav ul ul {
-    display: none;
+.dropdownMenu{
+ cursor:pointer;
+ display: none;
+ position:fixed;
+ border-radius:5px;
+ background-color:#004D00;
+ z-index:999;
+ padding:10px 0px 10px 0px;
 }
 
-nav ul li:hover > ul {
-	display:block;
-	background-color:lightgrey;
+.fallback:hover .dropdownMenu{
+ display:block;
+}
+
+.dropdownText {
+ width:100%;
+ text-align:center;
+ margin: 0 auto;
+ padding:4px 0px;
+}
+
+.dropdownText:hover {
+ background-color:#FFEDB3;
 }
 
 form {
@@ -89,7 +109,7 @@ form {
  text-align:right;
 }
 
-#userContainer a {
+#userContainer  a {
  margin-right:40px;
 }
 
@@ -107,12 +127,24 @@ form {
  margin-top:120px;
 }
 
+#headerHigh {
+ cursor:default;
+ text-align:center;
+ color:#003300;
+ font-size:56px;
+ font-weight:bold;
+ margin-top:40px;
+}
+
 #footer {
  bottom:10px;
  width:100%;
  text-align:center;
  font-size:14px;
+ position:relative;
+ margin-top:14px;
 }
+
 
 #search {
  height:70px;
@@ -144,7 +176,7 @@ form {
  padding:20px;
  margin:0 auto;
  border-radius:150px;
- 
+ margin-bottom:15px;
  background-color:white;
 }
 
@@ -154,6 +186,7 @@ form {
  height:80%;
  max-height:400px;
  margin: 0 auto;
+ overflow:scroll;
 }
 
 #nodeSideTools {
@@ -172,6 +205,9 @@ form {
  display:none;
 }
 
+.saveButton {
+ display: none;
+}
 .button {
  width: 100%;
  cursor: pointer;
@@ -182,6 +218,25 @@ form {
  opacity:1;
 }
 
+#careernodes {
+ position:relative;
+ width:80%;i
+ padding:20px;
+ margin:0 auto;
+ border-radius:150px;
+ 
+ background-color:white;
+}
+
+#careernodes li {
+ list-style-type: none;
+ margin:0px;
+ padding:0px;
+}
+
+#careernodes h2 {
+ text-align: center;
+}
 #pathbuttons {
 text-align:center;
 }
@@ -208,12 +263,12 @@ color:white;
 }
 
 .smallSubHeader {
- margin-top:8px;
+ margin-top:12px;
  margin-bottom:15px;
  text-align:center;
- font-size:24px;
- letter-spacing:6px;
- font-weight:bold;
+ font-size:28px;
+ letter-spacing:4px;
+ font-weight:bolder;
 }
 
 .Abouttext {
@@ -255,12 +310,17 @@ border:0;border-collapse:collapse;
  background-color:#9FFF80;
 }
 
-.listInputContainer, .inputBlock {
+.listInputContainer, .inputBlock, .listInputContainer2 {
  margin-bottom:20px;
  width:100%;
 }
 
-.addListInputButton {
+.sortable{
+ list-style:none;
+ padding:0px;
+}
+
+.addListInputButton, .addListInputButton2 {
  display:inline-block;
  position:absolute;
  background-color:white;
@@ -298,7 +358,7 @@ border:0;border-collapse:collapse;
 .kwicks > a:last-child { border-right:0px; } 
 
 .mynode {
- margin: 0 auto;
+ /*margin: 0 auto;*/
  padding: 10px;
  margin-top: 5px;
  margin-bottom: 10px; 
@@ -332,6 +392,10 @@ margin-right: 20%;
  margin-right: 10px;
 }
 
+#careernodes ul {
+ margin-left: -40;
+}
+
 /*       Correctness Indicators          */
 .errorlist {
  padding:10px 0px 10px 0px;
@@ -354,6 +418,15 @@ margin-right: 20%;
  background-color:#B3FFFF;
 }
 
+.failToken {
+ padding:10px 0px 10px 0px;
+ margin-top:10px;
+ margin-bottom:5px;
+ width:100%;
+ font-weight:bold;
+ background-color:#FF8080;
+}
+
 .link {  
 stroke: #666;
 opacity: 0.6;
@@ -369,3 +442,44 @@ font: 20px serif;
 opacity: 0.6;
 pointer-events: none; 
 }
+
+/*          SVG Style         */
+.container {
+ position:relative;
+ height:400px;
+ margin:0px auto;
+ width:100%;
+}
+
+.container svg {
+ margin:0px auto;
+ bottom:0;
+}
+
+#career {
+ display:none;
+}
+
+/*           Text Color           */
+.goodColorText{
+ color:#004D00;
+ font-weight:bold;
+ font-size:16px;
+ padding:6px;
+ border-radius:25px;
+ background-color:#80FF80;
+}
+
+.badColorText{
+ color:#AD0000;
+ font-weight:bold;
+ font-size:16px;
+ padding:6px;
+ border-radius:25px;
+ background-color:#FF8080;
+}
+
+.neutralColorText{
+ color:gray;
+}
+

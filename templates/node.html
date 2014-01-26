@@ -1,59 +1,16 @@
-<!--
-<script type="text/javascript">
-	function display_markdown() {
-		var rawContent = $("#node_raw").val();
-		$("#node_saved").val(rawContent);
-		var converter = Markdown.getSanitizingConverter();
-		$("#nodecontent").html(converter.makeHtml(rawContent)).css("display","");
-	}
-
-	function saveContent() {
-		var rawContent = $("#node_raw").val();
-		$("#node_raw").css("display","none");
-		$("#edit_content").css("display","");
-		$("#save_content").css("display","none");
-		$("#cancel_edit").css("display","none");
-		display_markdown();
-	}
-	function editContent() {
-		$("#node_raw").css("display","");
-		$("#nodecontent").css("display","none");
-		$("#edit_content").css("display","none");
-		$("#save_content").css("display","");
-		$("#cancel_edit").css("display","");
-	}
-	function cancelEdit() {
-		$("#node_raw").val($("#node_saved").val());
-		$("#node_raw").css("display","none");
-		$("#edit_content").css("display", "");
-		$("#save_content").css("display", "none");
-		$("#cancel_edit").css("display","none");
-		display_markdown();
-	}
-
-	$(document).ready(function () {
-		display_markdown();
-		$("#edit_content").bind("click", editContent);
-		$("#save_content").bind("click", saveContent);
-		$("#cancel_edit").bind("click", cancelEdit);
-	});
-
- </script>-->
-
-<!--
-
-
-
-
--->
-
+{% include "header_high.html" %}
+<div id="subheader" class="unselectable">Skills</div>
 {% include "mainmenu.html" %}
-
 {% if node %}
  <div id="node" pid="{{ node.id }}">
-  <div id="node_name" class="smallSubHeader">{{ node.name }}</div>
-  <div id="nodeContent">{{ node.content }}</div>
+  <div id="career" style="display:none">{{ career }}</div>
+  <div class="smallSubHeader">{{ node.name }}</div>
+  <div id="nodeContent" title="You can use markdown. Include links with [link title](http://url.com)"></div>
+  <div id="rawContent" style="display:none">{{ node.content }}</div>
   <div id="nodeSideTools">
+   <div class="saveButton">
+    <img title="Save" class="button" src="http://png-4.findicons.com/files/icons/138/toolbar/128/save.png" />
+   </div>
    <div class="cancelButton">
     <img title="Cancel" class="button" src="http://www.clker.com/cliparts/U/f/r/9/f/m/cancel-button-no-line-md.png" />
    </div>
@@ -61,11 +18,15 @@
     <img title="Edit" class="button" src="http://icons.iconarchive.com/icons/custom-icon-design/office/256/edit-icon.png" />
    </div>
    <div class="upvoteButton" pid="{{node.id}}" model="node">
-    <img title="Upvote" class="button" src="{{STATIC_URL}}images/upvote.png" />
+    <img title="This was helpful!" class="button" src="{{STATIC_URL}}images/upvote.png" />
    </div>
-   <div id="nodeStats">{{rating}}</div>
+<div id="nodeStats">
+{% autoescape off %}
+{{rating}}
+{% endautoescape %}
+</div>
    <div class="downvoteButton" pid="{{node.id}}" model="node">
-    <img title="Downvote" class="button" src="{{STATIC_URL}}images/downvote.png" />
+    <img title="This was not helpful." class="button" src="{{STATIC_URL}}images/downvote.png" />
    </div>
   </div>
   <div class="container"></div>
@@ -73,9 +34,13 @@
 
 $(document).ready(function () {
  loadGraph({{ node.id}});
+ $("#nodeContent").html(markdown($("#rawContent").html()));
 });
 
-
+function markdown(content) {
+   var converter = Markdown.getSanitizingConverter();
+   return converter.makeHtml(content);
+}
 </script>
 
  </div>
