@@ -243,6 +243,14 @@ form {
 #careernodes h2 {
  text-align: center;
 }
+
+#careernodes p {
+}
+
+#mycareer-info p {
+ overflow: scroll;
+}
+
 #pathbuttons {
 text-align:center;
 }

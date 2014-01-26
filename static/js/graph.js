@@ -64,8 +64,8 @@ var node = svg.selectAll(".node")
 .attr("class", "node") 
 .on("mouseover", mouseover) 
 .on("mouseout", mouseout) 
-.on("click", click)
-.on("dblclick", dblclick)
+.on("click", dblclick)
+.on("dblclick", click)
 .call(force.drag); 
 
 node.append("circle") 
