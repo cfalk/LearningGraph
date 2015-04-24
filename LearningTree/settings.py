@@ -19,12 +19,12 @@ STATIC_URL = '/static/'
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'sc1i=cl(qzk2^23)ax$ji0jyl1c8f5su4n9o+zcxjdj^ld$atr'
-SOCIAL_AUTH_FACEBOOK_KEY = '255348757965371'
-SOCIAL_AUTH_FACEBOOK_SECRET = '4cc41c04cb9b4c6a589fb771fcbce73d'
+SECRET_KEY = 'redacted'
+SOCIAL_AUTH_FACEBOOK_KEY = 'redacted'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'redacted'
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '102674902233-2ji9jjk1urv2qqrp87dhttiq9q3rh5uj.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'qi1GgqKMS2xtnL1qaynakqex'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'redacted'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'redacted'
 
 SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
 SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
